@@ -1,789 +1,1256 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZL Market Place - Platform E-Commerce Masa Depan</title>
+    <title>ZL Market Place - Platform Jual Beli Online Terpercaya</title>
+    <meta name="description" content="ZL Market Place adalah platform marketplace terpercaya dengan ribuan produk berkualitas dari seller terbaik. Belanja online aman dan mudah dengan harga terbaik.">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-        .card-hover { transition: transform 0.3s ease, box-shadow 0.3s ease; }
-        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #1E40AF 0%, #7C3AED 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
     </style>
 </head>
-<body class="bg-gray-50">
-    <!-- Navigation -->
-    <nav class="bg-white shadow-lg fixed w-full z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <div class="flex-shrink-0 flex items-center">
-                        <img src="https://raw.githubusercontent.com/kongali1720/kongali1720.github.io/main/zl-marketplace-logo.jpeg" alt="ZL Market Place" class="w-10 h-10 rounded-lg object-contain">
-                        <span class="ml-3 text-xl font-bold text-gray-800">Market Place</span>
+<body class="min-h-screen bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-lg shadow-sm sticky top-0 z-50">
+        <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 rounded-xl overflow-hidden shadow-md">
+                        <img src="https://raw.githubusercontent.com/kongali1720/kongali1720.github.io/main/zl-marketplace-logo.jpeg" alt="ZL Market Place Logo" class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-900">ZL Market Place</h1>
+                        <p class="text-xs text-gray-500 -mt-1">Marketplace Premium</p>
                     </div>
                 </div>
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#features" class="text-gray-700 hover:text-purple-600 font-medium">Fitur</a>
-                    <a href="#business" class="text-gray-700 hover:text-purple-600 font-medium">Bisnis Model</a>
-                    <a href="#market" class="text-gray-700 hover:text-purple-600 font-medium">Peluang Pasar</a>
-                    <a href="#investment" class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition">Investasi</a>
+
+                <div class="hidden md:flex flex-1 max-w-2xl mx-8">
+                    <div class="relative w-full">
+                        <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        <input type="text" id="searchInput" placeholder="Cari produk, brand, atau kategori..." class="pl-12 pr-4 py-3 w-full border-gray-200 rounded-full bg-gray-100 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
+                    </div>
                 </div>
-                
-                <!-- Mobile Menu Button -->
+
+                <div class="hidden md:flex items-center space-x-2">
+                    <button class="relative p-2 hover:bg-gray-100 rounded-lg">
+                        <i class="fas fa-heart text-xl"></i>
+                        <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full" id="wishlistCount">0</span>
+                    </button>
+                    <button class="relative p-2 hover:bg-gray-100 rounded-lg" id="cartBtn">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full" id="cartCount">0</span>
+                    </button>
+                    <button class="p-2 hover:bg-gray-100 rounded-lg">
+                        <i class="fas fa-user text-xl"></i>
+                    </button>
+                </div>
+
                 <div class="md:hidden">
-                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-purple-600 p-2">
-                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    <button id="mobileMenuBtn" class="p-2 hover:bg-gray-100 rounded-lg">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="md:hidden py-4 border-t hidden">
+                <div class="relative mb-4">
+                    <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    <input type="text" placeholder="Cari produk..." class="pl-12 pr-4 py-3 w-full rounded-full bg-gray-100">
+                </div>
+                <div class="flex flex-col space-y-2">
+                    <button class="flex items-center justify-start p-3 hover:bg-gray-100 rounded-lg">
+                        <i class="fas fa-heart w-5 h-5 mr-3"></i> Wishlist
+                        <span class="ml-auto bg-red-500 text-white text-xs px-2 py-1 rounded-full">0</span>
+                    </button>
+                    <button class="flex items-center justify-start p-3 hover:bg-gray-100 rounded-lg">
+                        <i class="fas fa-shopping-cart w-5 h-5 mr-3"></i> Keranjang
+                        <span class="ml-auto bg-red-500 text-white text-xs px-2 py-1 rounded-full">0</span>
+                    </button>
+                    <button class="flex items-center justify-start p-3 hover:bg-gray-100 rounded-lg">
+                        <i class="fas fa-user w-5 h-5 mr-3"></i> Akun
                     </button>
                 </div>
             </div>
         </div>
-        
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200 shadow-lg">
-            <div class="px-4 py-6 space-y-4">
-                <a href="#features" class="block text-gray-700 hover:text-purple-600 font-medium py-2 border-b border-gray-100">Fitur</a>
-                <a href="#business" class="block text-gray-700 hover:text-purple-600 font-medium py-2 border-b border-gray-100">Bisnis Model</a>
-                <a href="#market" class="block text-gray-700 hover:text-purple-600 font-medium py-2 border-b border-gray-100">Peluang Pasar</a>
-                <a href="#investment" class="block bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition text-center mt-4">Investasi</a>
-            </div>
-        </div>
-    </nav>
+    </header>
 
     <!-- Hero Section -->
-    <section class="text-white pt-20" style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%), url('https://raw.githubusercontent.com/kongali1720/kongali1720.github.io/main/background-marketplace.jpeg') center/cover;">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div>
-                    <!-- Large Centered Logo -->
-                    <div class="flex justify-center mb-8">
-                        <img src="https://raw.githubusercontent.com/kongali1720/kongali1720.github.io/main/zl-marketplace-logo.jpeg" 
-                             alt="ZL Market Place Logo" 
-                             class="w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 object-contain"
-                             style="filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3)); mix-blend-mode: darken; opacity: 0.95;">
+    <section class="py-24 sm:py-32 relative overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('keys/hero-bg?prompt=modern%20e-commerce%20shopping%20background%20with%20packages%20and%20technology')">
+            <div class="absolute inset-0 bg-black opacity-60"></div>
+        </div>
+        <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center text-white">
+                <div class="mb-8">
+                    <div class="w-24 h-24 mx-auto mb-4 rounded-2xl overflow-hidden shadow-2xl">
+                        <img src="https://raw.githubusercontent.com/kongali1720/kongali1720.github.io/main/zl-marketplace-logo.jpeg" alt="ZL Market Place Logo" class="w-full h-full object-cover">
                     </div>
-                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 text-center">Platform E-Commerce Terdepan untuk Generasi Digital</h1>
-                    <p class="text-lg lg:text-xl mb-8 text-purple-100 text-center">ZL Market Place menghubungkan jutaan pembeli dan penjual dengan teknologi AI terdepan, sistem pembayaran terintegrasi, dan pengalaman berbelanja yang revolusioner.</p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <button id="demo-btn" class="bg-white text-purple-600 px-6 sm:px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition text-center flex items-center justify-center">
-                            <i data-lucide="play" class="w-4 h-4 mr-2"></i>
-                            Lihat Demo Video
+                    <h2 class="text-2xl font-bold text-yellow-300 mb-2">ZL Market Place</h2>
+                </div>
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight">
+                    Temukan Produk <span class="text-yellow-300">Premium</span>
+                    <span class="block">Untuk Gaya Hidup Anda</span>
+                </h1>
+                <p class="mt-6 max-w-2xl mx-auto text-lg md:text-xl text-gray-200">
+                    Marketplace terakurasi dengan jutaan produk berkualitas dari brand dan seller terbaik. Belanja online aman, mudah, dan penuh gaya.
+                </p>
+                <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+                    <button id="startShoppingBtn" class="bg-white text-gray-900 hover:bg-gray-100 shadow-lg transform hover:scale-105 transition-transform px-8 py-3 rounded-lg font-semibold">
+                        Mulai Belanja Sekarang <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                    <button id="becomeSellerBtn" class="border-2 border-white text-white hover:bg-white hover:text-gray-900 shadow-lg transform hover:scale-105 transition-transform px-8 py-3 rounded-lg font-semibold">
+                        Daftar Sebagai Seller
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Filter -->
+    <section class="bg-white/60 backdrop-blur-md py-6 border-b sticky top-20 z-40">
+        <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                <div class="flex flex-wrap gap-2" id="categoryFilter">
+                    <button class="category-btn active px-4 py-2 rounded-lg border transition-all bg-gray-900 text-white" data-category="all">
+                        Semua Kategori <span class="ml-2 bg-gray-700 text-white text-xs px-2 py-1 rounded-full">1250</span>
+                    </button>
+                    <button class="category-btn px-4 py-2 rounded-lg border transition-all bg-white hover:bg-gray-50" data-category="electronics">
+                        Elektronik <span class="ml-2 bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded-full">320</span>
+                    </button>
+                    <button class="category-btn px-4 py-2 rounded-lg border transition-all bg-white hover:bg-gray-50" data-category="fashion">
+                        Fashion <span class="ml-2 bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded-full">450</span>
+                    </button>
+                    <button class="category-btn px-4 py-2 rounded-lg border transition-all bg-white hover:bg-gray-50" data-category="home">
+                        Rumah & Taman <span class="ml-2 bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded-full">280</span>
+                    </button>
+                    <button class="category-btn px-4 py-2 rounded-lg border transition-all bg-white hover:bg-gray-50" data-category="sports">
+                        Olahraga <span class="ml-2 bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded-full">200</span>
+                    </button>
+                </div>
+
+                <div class="flex items-center gap-4 self-end lg:self-center">
+                    <button class="flex items-center gap-2 bg-white px-4 py-2 rounded-lg border">
+                        <i class="fas fa-filter"></i>
+                        Filter
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    
+                    <div class="flex items-center border rounded-lg bg-white">
+                        <button id="gridView" class="grid-list-btn active p-2 rounded-l-lg">
+                            <i class="fas fa-th-large"></i>
                         </button>
-                        <button class="border-2 border-white text-white px-6 sm:px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-purple-600 transition text-center flex items-center justify-center">
-                            <i data-lucide="download" class="w-4 h-4 mr-2"></i>
-                            Download Pitch Deck
+                        <button id="listView" class="grid-list-btn p-2 rounded-r-lg">
+                            <i class="fas fa-list"></i>
                         </button>
                     </div>
                 </div>
-                <div class="lg:text-right">
-                    <img src="https://raw.githubusercontent.com/kongali1720/kongali1720.github.io/main/zl-marketplace-hero.jpeg" alt="ZL Market Place Platform" class="rounded-lg shadow-2xl w-full max-w-lg mx-auto lg:mx-0">
-                </div>
             </div>
         </div>
     </section>
 
-    <!-- Market Opportunity -->
-    <section id="market" class="py-20 relative" style="background: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)), url('https://raw.githubusercontent.com/kongali1720/kongali1720.github.io/main/background-marketplace.jpeg') center/cover;">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-900 mb-4">Peluang Pasar yang Menggiurkan</h2>
-                <p class="text-xl text-gray-600">Industri e-commerce Indonesia tumbuh 30% per tahun dengan nilai pasar $50 miliar</p>
+    <!-- Flash Sale Section -->
+    <section class="py-16 relative overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('keys/flash-sale-bg?prompt=shopping%20flash%20sale%20background%20with%20lightning%20and%20discounts')">
+            <div class="absolute inset-0 bg-white opacity-90"></div>
+        </div>
+        <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col md:flex-row items-center justify-between mb-8 gap-4">
+                <div class="flex items-center gap-4">
+                    <i class="fas fa-bolt text-yellow-500 text-3xl"></i>
+                    <h2 class="text-3xl font-bold text-gray-900">Flash Sale</h2>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="text-gray-600 font-medium">Berakhir dalam:</span>
+                    <div class="flex items-center gap-2" id="countdown">
+                        <div class="flex flex-col items-center">
+                            <span id="hours" class="text-2xl font-bold text-gray-900 bg-gray-100 rounded-lg px-3 py-2">05</span>
+                            <span class="text-xs text-gray-500 mt-1">Jam</span>
+                        </div>
+                        <span class="text-2xl font-bold text-gray-400">:</span>
+                        <div class="flex flex-col items-center">
+                            <span id="minutes" class="text-2xl font-bold text-gray-900 bg-gray-100 rounded-lg px-3 py-2">30</span>
+                            <span class="text-xs text-gray-500 mt-1">Menit</span>
+                        </div>
+                        <span class="text-2xl font-bold text-gray-400">:</span>
+                        <div class="flex flex-col items-center">
+                            <span id="seconds" class="text-2xl font-bold text-gray-900 bg-gray-100 rounded-lg px-3 py-2">45</span>
+                            <span class="text-xs text-gray-500 mt-1">Detik</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div class="text-center">
-                    <div class="text-4xl font-bold text-purple-600 mb-2">$50B</div>
-                    <div class="text-gray-700">Nilai Pasar E-commerce Indonesia</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-4xl font-bold text-purple-600 mb-2">30%</div>
-                    <div class="text-gray-700">Pertumbuhan Tahunan</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-4xl font-bold text-purple-600 mb-2">270M</div>
-                    <div class="text-gray-700">Populasi Indonesia</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-4xl font-bold text-purple-600 mb-2">60%</div>
-                    <div class="text-gray-700">Penetrasi Internet</div>
-                </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="flashSaleProducts">
+                <!-- Flash sale products will be loaded here -->
             </div>
         </div>
     </section>
 
-    <!-- Project Structure Section -->
-    <section class="py-16 sm:py-20 relative" style="background: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)), url('https://raw.githubusercontent.com/kongali1720/kongali1720.github.io/main/background-marketplace.jpeg') center/cover;">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12 sm:mb-16">
-                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Struktur Proyek Enterprise-Ready</h2>
-                <p class="text-base sm:text-lg lg:text-xl text-gray-600 px-4">Arsitektur modular dan scalable untuk pertumbuhan jangka panjang</p>
-            </div>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12">
-                <!-- Backend Structure -->
-                <div class="bg-gray-50 p-4 sm:p-6 lg:p-8 rounded-xl">
-                    <div class="flex items-center mb-6">
-                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                            <i data-lucide="server" class="w-5 h-5 sm:w-6 sm:h-6 text-blue-600"></i>
-                        </div>
-                        <h3 class="text-lg sm:text-xl font-bold ml-4">Backend Architecture</h3>
-                    </div>
-                    <div class="space-y-2 sm:space-y-3 text-xs sm:text-sm font-mono overflow-x-auto">
-                        <div class="pl-3 sm:pl-4 border-l-2 border-blue-200">
-                            <div class="font-semibold text-blue-800">📂 backend/</div>
-                            <div class="ml-3 sm:ml-4 space-y-1">
-                                <div>├── app/</div>
-                                <div class="ml-3 sm:ml-4 space-y-1 text-xs">
-                                    <div>├── models/ <span class="text-gray-500 hidden sm:inline"># User, Product, Order</span></div>
-                                    <div>├── routes/ <span class="text-gray-500 hidden sm:inline"># API endpoints</span></div>
-                                    <div>├── services/ <span class="text-gray-500 hidden sm:inline"># Business logic</span></div>
-                                    <div>├── utils/ <span class="text-gray-500 hidden sm:inline"># Helpers</span></div>
-                                    <div>└── config/ <span class="text-gray-500 hidden sm:inline"># Settings</span></div>
-                                </div>
-                                <div>├── tests/ <span class="text-gray-500 hidden sm:inline"># Unit & Integration</span></div>
-                                <div>└── requirements.txt</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Frontend Structure -->
-                <div class="bg-gray-50 p-4 sm:p-6 lg:p-8 rounded-xl">
-                    <div class="flex items-center mb-6">
-                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 rounded-lg flex items-center justify-center">
-                            <i data-lucide="monitor" class="w-5 h-5 sm:w-6 sm:h-6 text-purple-600"></i>
-                        </div>
-                        <h3 class="text-lg sm:text-xl font-bold ml-4">Frontend Architecture</h3>
-                    </div>
-                    <div class="space-y-2 sm:space-y-3 text-xs sm:text-sm font-mono overflow-x-auto">
-                        <div class="pl-3 sm:pl-4 border-l-2 border-purple-200">
-                            <div class="font-semibold text-purple-800">📂 frontend/</div>
-                            <div class="ml-3 sm:ml-4 space-y-1">
-                                <div>├── public/ <span class="text-gray-500 hidden sm:inline"># Static files</span></div>
-                                <div>├── src/</div>
-                                <div class="ml-3 sm:ml-4 space-y-1 text-xs">
-                                    <div>├── components/ <span class="text-gray-500 hidden sm:inline"># Reusable UI</span></div>
-                                    <div>├── pages/ <span class="text-gray-500 hidden sm:inline"># Route pages</span></div>
-                                    <div>├── hooks/ <span class="text-gray-500 hidden sm:inline"># Custom hooks</span></div>
-                                    <div>├── services/ <span class="text-gray-500 hidden sm:inline"># API calls</span></div>
-                                    <div>└── context/ <span class="text-gray-500 hidden sm:inline"># State mgmt</span></div>
-                                </div>
-                                <div>└── package.json</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Tech Stack -->
-            <div class="mt-12 sm:mt-16">
-                <h3 class="text-lg sm:text-xl font-bold text-center mb-6 sm:mb-8">Technology Stack Terpilih</h3>
-                <div class="grid grid-cols-3 sm:grid-cols-6 gap-4 sm:gap-6">
-                    <div class="text-center">
-                        <div class="w-12 h-12 sm:w-16 sm:h-16 mx-auto bg-green-100 rounded-lg flex items-center justify-center mb-2 sm:mb-3">
-                            <img src="keys/nodejs-logo?prompt=Node.js logo, green, simple" alt="Node.js" class="w-6 h-6 sm:w-10 sm:h-10">
-                        </div>
-                        <div class="text-xs sm:text-sm font-medium">Node.js</div>
-                    </div>
-                    <div class="text-center">
-                        <div class="w-12 h-12 sm:w-16 sm:h-16 mx-auto bg-blue-100 rounded-lg flex items-center justify-center mb-2 sm:mb-3">
-                            <img src="keys/react-logo?prompt=React.js logo, blue, simple" alt="React" class="w-6 h-6 sm:w-10 sm:h-10">
-                        </div>
-                        <div class="text-xs sm:text-sm font-medium">React</div>
-                    </div>
-                    <div class="text-center">
-                        <div class="w-12 h-12 sm:w-16 sm:h-16 mx-auto bg-blue-100 rounded-lg flex items-center justify-center mb-2 sm:mb-3">
-                            <img src="keys/postgres-logo?prompt=PostgreSQL logo, blue elephant, simple" alt="PostgreSQL" class="w-6 h-6 sm:w-10 sm:h-10">
-                        </div>
-                        <div class="text-xs sm:text-sm font-medium">PostgreSQL</div>
-                    </div>
-                    <div class="text-center">
-                        <div class="w-12 h-12 sm:w-16 sm:h-16 mx-auto bg-red-100 rounded-lg flex items-center justify-center mb-2 sm:mb-3">
-                            <img src="keys/redis-logo?prompt=Redis logo, red, simple" alt="Redis" class="w-6 h-6 sm:w-10 sm:h-10">
-                        </div>
-                        <div class="text-xs sm:text-sm font-medium">Redis</div>
-                    </div>
-                    <div class="text-center">
-                        <div class="w-12 h-12 sm:w-16 sm:h-16 mx-auto bg-blue-100 rounded-lg flex items-center justify-center mb-2 sm:mb-3">
-                            <img src="keys/docker-logo?prompt=Docker logo, blue whale, simple" alt="Docker" class="w-6 h-6 sm:w-10 sm:h-10">
-                        </div>
-                        <div class="text-xs sm:text-sm font-medium">Docker</div>
-                    </div>
-                    <div class="text-center">
-                        <div class="w-12 h-12 sm:w-16 sm:h-16 mx-auto bg-orange-100 rounded-lg flex items-center justify-center mb-2 sm:mb-3">
-                            <img src="keys/aws-logo?prompt=AWS logo, orange, simple" alt="AWS" class="w-6 h-6 sm:w-10 sm:h-10">
-                        </div>
-                        <div class="text-xs sm:text-sm font-medium">AWS</div>
-                    </div>
-                </div>
-            </div>
+    <!-- Product Grid -->
+    <section id="productsSection" class="py-16 relative overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('keys/products-bg?prompt=clean%20modern%20shopping%20background%20with%20products%20display')">
+            <div class="absolute inset-0 bg-white opacity-90"></div>
         </div>
-    </section>
-    
-    <!-- Development Roadmap -->
-    <section class="py-16 sm:py-20 relative" style="background: linear-gradient(rgba(249, 250, 251, 0.95), rgba(249, 250, 251, 0.95)), url('https://raw.githubusercontent.com/kongali1720/kongali1720.github.io/main/background-marketplace.jpeg') center/cover;">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12 sm:mb-16">
-                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Roadmap Pengembangan</h2>
-                <p class="text-base sm:text-lg lg:text-xl text-gray-600 px-4">Timeline eksekusi dari MVP hingga IPO dalam 5 tahun</p>
+        <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-gray-900 mb-2">
+                    Produk Pilihan Untuk Anda
+                </h2>
+                <p class="text-gray-600 mb-8">
+                    Jelajahi koleksi produk terbaik yang kami pilihkan khusus untuk Anda.
+                </p>
             </div>
-            
-            <div class="relative">
-                <!-- Timeline line - hidden on mobile -->
-                <div class="absolute left-1/2 transform -translate-x-0.5 w-1 h-full bg-purple-200 hidden lg:block"></div>
-                
-                <div class="space-y-8 sm:space-y-12">
-                    <!-- Phase 1 -->
-                    <div class="flex flex-col lg:flex-row items-center">
-                        <div class="w-full lg:w-1/2 lg:pr-8 mb-6 lg:mb-0">
-                            <div class="bg-white p-4 sm:p-6 rounded-xl shadow-lg">
-                                <div class="flex items-center mb-4">
-                                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                                        <span class="text-green-600 font-bold text-sm sm:text-base">1</span>
-                                    </div>
-                                    <div class="ml-4">
-                                        <h3 class="text-lg sm:text-xl font-bold">Bulan 1-3: MVP Development</h3>
-                                        <p class="text-sm sm:text-base text-gray-600">Foundation & Core Features</p>
-                                    </div>
-                                </div>
-                                <ul class="space-y-2 text-xs sm:text-sm">
-                                    <li class="flex items-center"><i data-lucide="check" class="w-3 h-3 sm:w-4 sm:h-4 text-green-500 mr-2 flex-shrink-0"></i>Backend API development</li>
-                                    <li class="flex items-center"><i data-lucide="check" class="w-3 h-3 sm:w-4 sm:h-4 text-green-500 mr-2 flex-shrink-0"></i>Frontend marketplace UI</li>
-                                    <li class="flex items-center"><i data-lucide="check" class="w-3 h-3 sm:w-4 sm:h-4 text-green-500 mr-2 flex-shrink-0"></i>Basic payment integration</li>
-                                    <li class="flex items-center"><i data-lucide="check" class="w-3 h-3 sm:w-4 sm:h-4 text-green-500 mr-2 flex-shrink-0"></i>50 early adopter sellers</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="hidden lg:block w-8 h-8 bg-purple-600 rounded-full relative z-10"></div>
-                        <div class="w-full lg:w-1/2 lg:pl-8"></div>
-                    </div>
-                    
-                    <!-- Phase 2 -->
-                    <div class="flex flex-col lg:flex-row items-center">
-                        <div class="w-full lg:w-1/2 lg:pr-8 lg:order-1"></div>
-                        <div class="hidden lg:block w-8 h-8 bg-purple-600 rounded-full relative z-10"></div>
-                        <div class="w-full lg:w-1/2 lg:pl-8 mb-6 lg:mb-0">
-                            <div class="bg-white p-4 sm:p-6 rounded-xl shadow-lg">
-                                <div class="flex items-center mb-4">
-                                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-                                        <span class="text-blue-600 font-bold text-sm sm:text-base">2</span>
-                                    </div>
-                                    <div class="ml-4">
-                                        <h3 class="text-lg sm:text-xl font-bold">Bulan 4-6: Feature Enhancement</h3>
-                                        <p class="text-sm sm:text-base text-gray-600">Advanced Functionality</p>
-                                    </div>
-                                </div>
-                                <ul class="space-y-2 text-xs sm:text-sm">
-                                    <li class="flex items-center"><i data-lucide="clock" class="w-3 h-3 sm:w-4 sm:h-4 text-blue-500 mr-2 flex-shrink-0"></i>Review & rating system</li>
-                                    <li class="flex items-center"><i data-lucide="clock" class="w-3 h-3 sm:w-4 sm:h-4 text-blue-500 mr-2 flex-shrink-0"></i>Real-time chat support</li>
-                                    <li class="flex items-center"><i data-lucide="clock" class="w-3 h-3 sm:w-4 sm:h-4 text-blue-500 mr-2 flex-shrink-0"></i>E-wallet integration</li>
-                                    <li class="flex items-center"><i data-lucide="clock" class="w-3 h-3 sm:w-4 sm:h-4 text-blue-500 mr-2 flex-shrink-0"></i>Promo & discount system</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Phase 3 -->
-                    <div class="flex flex-col lg:flex-row items-center">
-                        <div class="w-full lg:w-1/2 lg:pr-8 mb-6 lg:mb-0">
-                            <div class="bg-white p-4 sm:p-6 rounded-xl shadow-lg">
-                                <div class="flex items-center mb-4">
-                                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
-                                        <span class="text-purple-600 font-bold text-sm sm:text-base">3</span>
-                                    </div>
-                                    <div class="ml-4">
-                                        <h3 class="text-lg sm:text-xl font-bold">Tahun 2: Mobile & AI</h3>
-                                        <p class="text-sm sm:text-base text-gray-600">Scale & Intelligence</p>
-                                    </div>
-                                </div>
-                                <ul class="space-y-2 text-xs sm:text-sm">
-                                    <li class="flex items-center"><i data-lucide="smartphone" class="w-3 h-3 sm:w-4 sm:h-4 text-purple-500 mr-2 flex-shrink-0"></i>Native mobile apps</li>
-                                    <li class="flex items-center"><i data-lucide="brain" class="w-3 h-3 sm:w-4 sm:h-4 text-purple-500 mr-2 flex-shrink-0"></i>AI recommendation engine</li>
-                                    <li class="flex items-center"><i data-lucide="users" class="w-3 h-3 sm:w-4 sm:h-4 text-purple-500 mr-2 flex-shrink-0"></i>1000+ active sellers</li>
-                                    <li class="flex items-center"><i data-lucide="trending-up" class="w-3 h-3 sm:w-4 sm:h-4 text-purple-500 mr-2 flex-shrink-0"></i>Advanced analytics</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="hidden lg:block w-8 h-8 bg-purple-600 rounded-full relative z-10"></div>
-                        <div class="w-full lg:w-1/2 lg:pl-8"></div>
-                    </div>
-                </div>
+
+            <div id="productGrid" class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                <!-- Products will be loaded here -->
             </div>
         </div>
     </section>
 
-    <!-- Features -->
-    <section id="features" class="py-16 sm:py-20 relative" style="background: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)), url('https://raw.githubusercontent.com/kongali1720/kongali1720.github.io/main/background-marketplace.jpeg') center/cover;">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12 sm:mb-16">
-                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Fitur Unggulan yang Mengubah Permainan</h2>
-                <p class="text-base sm:text-lg lg:text-xl text-gray-600 px-4">Teknologi terdepan untuk pengalaman berbelanja yang tak terlupakan</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-                <div class="bg-white p-6 lg:p-8 rounded-xl shadow-lg card-hover">
-                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-6">
-                        <i data-lucide="brain" class="w-6 h-6 text-purple-600"></i>
-                    </div>
-                    <h3 class="text-lg sm:text-xl font-semibold mb-4">AI-Powered Recommendations</h3>
-                    <p class="text-sm sm:text-base text-gray-600">Sistem rekomendasi berbasis AI yang mempersonalisasi pengalaman berbelanja setiap user dengan akurasi 95%.</p>
-                </div>
-                <div class="bg-white p-6 lg:p-8 rounded-xl shadow-lg card-hover">
-                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-6">
-                        <i data-lucide="shield-check" class="w-6 h-6 text-green-600"></i>
-                    </div>
-                    <h3 class="text-lg sm:text-xl font-semibold mb-4">Keamanan Tingkat Bank</h3>
-                    <p class="text-sm sm:text-base text-gray-600">Enkripsi end-to-end, fraud detection AI, dan sistem pembayaran yang terintegrasi dengan semua bank lokal.</p>
-                </div>
-                <div class="bg-white p-6 lg:p-8 rounded-xl shadow-lg card-hover">
-                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-6">
-                        <i data-lucide="zap" class="w-6 h-6 text-blue-600"></i>
-                    </div>
-                    <h3 class="text-lg sm:text-xl font-semibold mb-4">Super Fast Performance</h3>
-                    <p class="text-sm sm:text-base text-gray-600">Loading time < 2 detik dengan CDN global dan arsitektur microservices yang scalable hingga jutaan user.</p>
-                </div>
-                <div class="bg-white p-6 lg:p-8 rounded-xl shadow-lg card-hover">
-                    <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-6">
-                        <i data-lucide="smartphone" class="w-6 h-6 text-yellow-600"></i>
-                    </div>
-                    <h3 class="text-lg sm:text-xl font-semibold mb-4">Mobile-First Design</h3>
-                    <p class="text-sm sm:text-base text-gray-600">Progressive Web App (PWA) dengan pengalaman native mobile, offline capability, dan push notifications.</p>
-                </div>
-                <div class="bg-white p-6 lg:p-8 rounded-xl shadow-lg card-hover">
-                    <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-6">
-                        <i data-lucide="truck" class="w-6 h-6 text-red-600"></i>
-                    </div>
-                    <h3 class="text-lg sm:text-xl font-semibold mb-4">Logistik Terintegrasi</h3>
-                    <p class="text-sm sm:text-base text-gray-600">Partnership dengan 15+ kurir nasional, real-time tracking, dan same-day delivery di 10 kota besar.</p>
-                </div>
-                <div class="bg-white p-6 lg:p-8 rounded-xl shadow-lg card-hover">
-                    <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-6">
-                        <i data-lucide="users" class="w-6 h-6 text-indigo-600"></i>
-                    </div>
-                    <h3 class="text-lg sm:text-xl font-semibold mb-4">Seller Tools Suite</h3>
-                    <p class="text-sm sm:text-base text-gray-600">Dashboard analytics, inventory management, marketing tools, dan automated customer service untuk seller.</p>
-                </div>
-            </div>
+    <!-- Features Section -->
+    <section class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('keys/features-bg?prompt=modern%20technology%20and%20shopping%20features%20background')">
+            <div class="absolute inset-0 bg-white opacity-90"></div>
         </div>
-    </section>
+        <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">
+                    Mengapa Memilih ZL Market?
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Kami berkomitmen memberikan pengalaman belanja online terbaik dengan layanan yang bisa Anda handalkan.
+                </p>
+            </div>
 
-    <!-- Business Model -->
-    <section id="business" class="py-20 relative" style="background: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)), url('https://raw.githubusercontent.com/kongali1720/kongali1720.github.io/main/background-marketplace.jpeg') center/cover;">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-900 mb-4">Model Bisnis yang Terbukti Menguntungkan</h2>
-                <p class="text-xl text-gray-600">Multiple revenue streams dengan margin yang sehat</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="bg-purple-50 p-6 rounded-xl">
-                    <h3 class="text-lg font-semibold mb-2">Commission (3-5%)</h3>
-                    <p class="text-gray-600 mb-4">Fee dari setiap transaksi seller</p>
-                    <div class="text-2xl font-bold text-purple-600">60%</div>
-                    <div class="text-sm text-gray-500">dari total revenue</div>
-                </div>
-                <div class="bg-blue-50 p-6 rounded-xl">
-                    <h3 class="text-lg font-semibold mb-2">Payment Gateway</h3>
-                    <p class="text-gray-600 mb-4">Fee processing pembayaran</p>
-                    <div class="text-2xl font-bold text-blue-600">20%</div>
-                    <div class="text-sm text-gray-500">dari total revenue</div>
-                </div>
-                <div class="bg-green-50 p-6 rounded-xl">
-                    <h3 class="text-lg font-semibold mb-2">Advertising</h3>
-                    <p class="text-gray-600 mb-4">Sponsored products & banner ads</p>
-                    <div class="text-2xl font-bold text-green-600">15%</div>
-                    <div class="text-sm text-gray-500">dari total revenue</div>
-                </div>
-                <div class="bg-yellow-50 p-6 rounded-xl">
-                    <h3 class="text-lg font-semibold mb-2">Premium Services</h3>
-                    <p class="text-gray-600 mb-4">Seller tools, analytics, priority</p>
-                    <div class="text-2xl font-bold text-yellow-600">5%</div>
-                    <div class="text-sm text-gray-500">dari total revenue</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Investment Requirements -->
-    <section class="py-20 relative" style="background: linear-gradient(rgba(243, 244, 246, 0.95), rgba(243, 244, 246, 0.95)), url('https://raw.githubusercontent.com/kongali1720/kongali1720.github.io/main/background-marketplace.jpeg') center/cover;">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Kebutuhan Modal & Penggunaan Dana</h2>
-                <p class="text-lg lg:text-xl text-gray-600 px-4">Total modal awal Rp 500 juta untuk membangun platform enterprise-grade</p>
-            </div>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <!-- Fund Usage Breakdown -->
-                <div class="space-y-6">
-                    <div class="bg-white p-6 rounded-xl shadow-lg">
-                        <div class="flex items-center justify-between mb-3">
-                            <h3 class="font-semibold text-lg">Development Platform</h3>
-                            <span class="text-2xl font-bold text-blue-600">40%</span>
-                        </div>
-                        <p class="text-gray-600 text-sm mb-3">Backend API, Frontend UI, Mobile App Development</p>
-                        <div class="w-full bg-gray-200 rounded-full h-2">
-                            <div class="bg-blue-600 h-2 rounded-full" style="width: 40%"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-white p-6 rounded-xl shadow-lg">
-                        <div class="flex items-center justify-between mb-3">
-                            <h3 class="font-semibold text-lg">Marketing & Akuisisi</h3>
-                            <span class="text-2xl font-bold text-green-600">30%</span>
-                        </div>
-                        <p class="text-gray-600 text-sm mb-3">User acquisition, seller onboarding, brand awareness</p>
-                        <div class="w-full bg-gray-200 rounded-full h-2">
-                            <div class="bg-green-600 h-2 rounded-full" style="width: 30%"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-white p-6 rounded-xl shadow-lg">
-                        <div class="flex items-center justify-between mb-3">
-                            <h3 class="font-semibold text-lg">Infrastructure & Security</h3>
-                            <span class="text-2xl font-bold text-orange-600">20%</span>
-                        </div>
-                        <p class="text-gray-600 text-sm mb-3">Server, cloud hosting, security systems, SSL</p>
-                        <div class="w-full bg-gray-200 rounded-full h-2">
-                            <div class="bg-orange-600 h-2 rounded-full" style="width: 20%"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-white p-6 rounded-xl shadow-lg">
-                        <div class="flex items-center justify-between mb-3">
-                            <h3 class="font-semibold text-lg">Operations & Support</h3>
-                            <span class="text-2xl font-bold text-purple-600">10%</span>
-                        </div>
-                        <p class="text-gray-600 text-sm mb-3">Customer service, legal, admin costs</p>
-                        <div class="w-full bg-gray-200 rounded-full h-2">
-                            <div class="bg-purple-600 h-2 rounded-full" style="width: 10%"></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Investment Timeline -->
-                <div class="bg-white p-8 rounded-xl shadow-lg">
-                    <h3 class="text-xl font-bold mb-6 text-center">Timeline Investasi</h3>
-                    <div class="space-y-6">
-                        <div class="flex items-center">
-                            <div class="w-4 h-4 bg-green-500 rounded-full mr-4"></div>
-                            <div>
-                                <h4 class="font-semibold">Pre-Seed: Rp 500 juta</h4>
-                                <p class="text-sm text-gray-600">MVP development & initial team</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center">
-                            <div class="w-4 h-4 bg-blue-500 rounded-full mr-4"></div>
-                            <div>
-                                <h4 class="font-semibold">Seed: Rp 2 miliar</h4>
-                                <p class="text-sm text-gray-600">Market expansion & mobile app</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center">
-                            <div class="w-4 h-4 bg-purple-500 rounded-full mr-4"></div>
-                            <div>
-                                <h4 class="font-semibold">Series A: Rp 10 miliar</h4>
-                                <p class="text-sm text-gray-600">AI features & national scale</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center">
-                            <div class="w-4 h-4 bg-orange-500 rounded-full mr-4"></div>
-                            <div>
-                                <h4 class="font-semibold">Series B+: Rp 50+ miliar</h4>
-                                <p class="text-sm text-gray-600">Regional expansion & IPO prep</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Financial Projections -->
-    <section class="py-20 bg-gray-900 text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold mb-4">Proyeksi Finansial 5 Tahun</h2>
-                <p class="text-xl text-gray-300">Target IPO pada tahun ke-5 dengan valuasi $1B</p>
-            </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-gray-800 p-8 rounded-xl">
-                    <h3 class="text-2xl font-bold mb-6">Tahun 1-2: Growth</h3>
-                    <div class="space-y-4">
-                        <div class="flex justify-between">
-                            <span>GMV</span>
-                            <span class="font-semibold">$10M - $50M</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>Revenue</span>
-                            <span class="font-semibold">$0.5M - $2.5M</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>Active Users</span>
-                            <span class="font-semibold">100K - 500K</span>
-                        </div>
+                <div class="text-center p-8 rounded-xl border bg-gray-50/50">
+                    <div class="flex items-center justify-center h-16 w-16 rounded-full bg-white shadow-md mb-6 mx-auto">
+                        <i class="fas fa-shield-alt text-blue-600 text-2xl"></i>
                     </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                        Produk Terjamin
+                    </h3>
+                    <p class="text-gray-600">
+                        Ribuan produk original dari seller terpercaya dengan jaminan kualitas terbaik.
+                    </p>
                 </div>
-                <div class="bg-gray-800 p-8 rounded-xl">
-                    <h3 class="text-2xl font-bold mb-6">Tahun 3-4: Scale</h3>
-                    <div class="space-y-4">
-                        <div class="flex justify-between">
-                            <span>GMV</span>
-                            <span class="font-semibold">$200M - $500M</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>Revenue</span>
-                            <span class="font-semibold">$10M - $25M</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>Active Users</span>
-                            <span class="font-semibold">2M - 5M</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-gray-800 p-8 rounded-xl">
-                    <h3 class="text-2xl font-bold mb-6">Tahun 5: IPO Ready</h3>
-                    <div class="space-y-4">
-                        <div class="flex justify-between">
-                            <span>GMV</span>
-                            <span class="font-semibold">$1B+</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>Revenue</span>
-                            <span class="font-semibold">$50M+</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>Active Users</span>
-                            <span class="font-semibold">10M+</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Investment Opportunity -->
-    <section id="investment" class="py-20 text-white relative" style="background: linear-gradient(rgba(147, 51, 234, 0.9), rgba(147, 51, 234, 0.9)), url('https://raw.githubusercontent.com/kongali1720/kongali1720.github.io/main/background-marketplace.jpeg') center/cover;">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-4xl font-bold mb-6">Peluang Investasi Terbatas</h2>
-            <p class="text-xl mb-12 text-purple-100">Series A: $5M untuk akuisisi user, teknologi AI, dan ekspansi ke 25 kota</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-                <div class="bg-purple-500 bg-opacity-50 p-6 rounded-xl">
-                    <h3 class="text-xl font-semibold mb-2">Use of Funds</h3>
-                    <div class="text-left space-y-2">
-                        <div class="flex justify-between">
-                            <span>Technology & AI</span>
-                            <span>40%</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>Marketing & CAC</span>
-                            <span>35%</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>Team & Operations</span>
-                            <span>20%</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>Legal & Compliance</span>
-                            <span>5%</span>
-                        </div>
+                <div class="text-center p-8 rounded-xl border bg-gray-50/50">
+                    <div class="flex items-center justify-center h-16 w-16 rounded-full bg-white shadow-md mb-6 mx-auto">
+                        <i class="fas fa-truck text-green-600 text-2xl"></i>
                     </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                        Pengiriman Cepat & Aman
+                    </h3>
+                    <p class="text-gray-600">
+                        Sistem logistik terintegrasi untuk pengiriman cepat dan aman ke seluruh Indonesia.
+                    </p>
                 </div>
-                <div class="bg-purple-500 bg-opacity-50 p-6 rounded-xl">
-                    <h3 class="text-xl font-semibold mb-2">Expected ROI</h3>
-                    <div class="text-3xl font-bold mb-2">10-15x</div>
-                    <p class="text-purple-100">dalam 5 tahun berdasarkan komparasi Tokopedia, Shopee, dan Bukalapak</p>
-                </div>
-                <div class="bg-purple-500 bg-opacity-50 p-6 rounded-xl">
-                    <h3 class="text-xl font-semibold mb-2">Exit Strategy</h3>
-                    <div class="text-left space-y-2">
-                        <div>• IPO di BEI/NYSE</div>
-                        <div>• Strategic acquisition</div>
-                        <div>• Secondary sale</div>
-                        <div>• Management buyback</div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="flex justify-center space-x-6">
-                <button class="bg-white text-purple-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition">Jadwalkan Meeting</button>
-                <button class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-purple-600 transition">Download Executive Summary</button>
+                <div class="text-center p-8 rounded-xl border bg-gray-50/50">
+                    <div class="flex items-center justify-center h-16 w-16 rounded-full bg-white shadow-md mb-6 mx-auto">
+                        <i class="fas fa-credit-card text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                        Pembayaran Terlindungi
+                    </h3>
+                    <p class="text-gray-600">
+                        Berbagai metode pembayaran aman dengan perlindungi transaksi 100%.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="text-white py-12 relative" style="background: linear-gradient(rgba(17, 24, 39, 0.95), rgba(17, 24, 39, 0.95)), url('https://raw.githubusercontent.com/kongali1720/kongali1720.github.io/main/background-marketplace.jpeg') center/cover;">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div>
-                    <div class="flex items-center mb-4">
-                        <img src="https://raw.githubusercontent.com/kongali1720/kongali1720.github.io/main/zl-marketplace-logo.jpeg" alt="ZL Market Place" class="w-10 h-10 rounded-lg object-contain">
-                        <span class="ml-3 text-xl font-bold">Market Place</span>
+    <footer class="bg-gray-900 text-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('keys/footer-bg?prompt=dark%20elegant%20footer%20background%20with%20shopping%20elements')">
+            <div class="absolute inset-0 bg-black opacity-80"></div>
+        </div>
+        <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="md:col-span-2 lg:col-span-1">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <img src="https://raw.githubusercontent.com/kongali1720/kongali1720.github.io/main/zl-marketplace-logo.jpeg" alt="ZL Market Place Logo" class="w-10 h-10 rounded-xl object-cover">
+                        <span class="text-2xl font-bold">ZL Market Place</span>
                     </div>
-                    <p class="text-gray-400">Platform e-commerce masa depan dengan teknologi AI terdepan.</p>
+                    <p class="text-gray-400 mb-4">
+                        Platform marketplace premium untuk semua kebutuhan belanja online Anda.
+                    </p>
                 </div>
+
                 <div>
-                    <h4 class="text-lg font-semibold mb-4">Kontak</h4>
-                    <div class="space-y-2 text-gray-400">
-                        <p>Email: investor@zlmarketplace.com</p>
-                        <p>Phone: +62 811-2345-6789</p>
-                        <p>Jakarta, Indonesia</p>
-                    </div>
+                    <span class="text-lg font-semibold mb-4 block text-gray-200">Kategori Populer</span>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Elektronik</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Fashion</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Rumah & Taman</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Olahraga</a></li>
+                    </ul>
                 </div>
+
                 <div>
-                    <h4 class="text-lg font-semibold mb-4">Dokumen</h4>
-                    <div class="space-y-2">
-                        <a href="#" class="block text-gray-400 hover:text-white transition">Pitch Deck</a>
-                        <a href="#" class="block text-gray-400 hover:text-white transition">Financial Model</a>
-                        <a href="#" class="block text-gray-400 hover:text-white transition">Market Research</a>
-                    </div>
+                    <span class="text-lg font-semibold mb-4 block text-gray-200">Layanan Pelanggan</span>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Pusat Bantuan</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Kebijakan Privasi</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Syarat & Ketentuan</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Hubungi Kami</a></li>
+                    </ul>
                 </div>
+
                 <div>
-                    <h4 class="text-lg font-semibold mb-4">Legal</h4>
-                    <div class="space-y-2">
-                        <a href="#" class="block text-gray-400 hover:text-white transition">Terms of Service</a>
-                        <a href="#" class="block text-gray-400 hover:text-white transition">Privacy Policy</a>
-                        <a href="#" class="block text-gray-400 hover:text-white transition">Investment Terms</a>
+                    <span class="text-lg font-semibold mb-4 block text-gray-200">Ikuti Kami</span>
+                    <div class="flex space-x-4">
+                        <a href="#" target="_blank" class="text-gray-400 hover:text-white hover:bg-gray-700 p-2 rounded-lg transition-colors">
+                            <i class="fab fa-facebook text-xl"></i>
+                        </a>
+                        <a href="#" target="_blank" class="text-gray-400 hover:text-white hover:bg-gray-700 p-2 rounded-lg transition-colors">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" target="_blank" class="text-gray-400 hover:text-white hover:bg-gray-700 p-2 rounded-lg transition-colors">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
                     </div>
                 </div>
             </div>
-            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2024 ZL Market Place. All rights reserved. Confidential Investment Presentation.</p>
+
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500">
+                <p>&copy; 2024 ZL Market Place. Semua hak dilindungi.</p>
             </div>
         </div>
     </footer>
-    
-    <!-- Video Demo Modal -->
-    <div id="video-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-hidden relative">
-            <div class="flex justify-between items-center p-4 border-b">
-                <h3 class="text-xl font-bold text-gray-900">ZL Market Place - Demo Video</h3>
-                <button id="close-modal" class="text-gray-500 hover:text-gray-700 p-2">
-                    <i data-lucide="x" class="w-6 h-6"></i>
-                </button>
-            </div>
-            <div class="relative" style="padding-bottom: 56.25%; height: 0;">
-                <iframe id="demo-video" 
-                    class="absolute top-0 left-0 w-full h-full" 
-                    src="" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen>
-                </iframe>
-            </div>
-            <div class="p-4 bg-gray-50">
-                <p class="text-sm text-gray-600 mb-2">
-                    <i data-lucide="info" class="w-4 h-4 inline mr-1"></i>
-                    Contoh demo marketplace dengan fitur-fitur modern seperti yang akan diimplementasikan di ZL Market Place
-                </p>
-                <div class="flex flex-wrap gap-2">
-                    <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">E-commerce Platform</span>
-                    <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Multi-vendor</span>
-                    <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">Modern UI/UX</span>
-                    <span class="px-2 py-1 bg-orange-100 text-orange-800 text-xs rounded-full">Mobile Responsive</span>
+
+    <!-- Shopping Cart Modal -->
+    <div id="cartModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-lg w-full max-w-md">
+                <div class="flex items-center justify-between p-6 border-b">
+                    <h3 class="text-lg font-semibold">Keranjang Belanja</h3>
+                    <button id="closeCartModal" class="text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <div id="cartItems" class="p-6 max-h-96 overflow-y-auto">
+                    <div class="text-center py-8 text-gray-500">
+                        <i class="fas fa-shopping-cart text-4xl mb-4"></i>
+                        <p>Keranjang Anda kosong</p>
+                    </div>
+                </div>
+                <div class="border-t p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="font-semibold">Total:</span>
+                        <span id="cartTotal" class="font-bold text-xl">Rp 0</span>
+                    </div>
+                    <button class="w-full bg-gray-900 text-white py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors">
+                        Checkout
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 
-    <script>
-        // Initialize Lucide icons
-        lucide.createIcons();
+    <script type="module">
+
+
+        // Sample products data
+        const products = [
+            {
+                id: 1,
+                name: 'iPhone 15 Pro Max 256GB - Garansi Resmi',
+                price: 'Rp 18.999.000',
+                originalPrice: 'Rp 21.999.000',
+                rating: 4.8,
+                reviews: 1250,
+                image: 'https://raw.githubusercontent.com/kongali1720/kongali1720.github.io/main/Iphone.png',
+                category: 'electronics',
+                discount: 14,
+                seller: 'Apple Store',
+                location: 'Jakarta Pusat'
+            },
+            {
+                id: 2,
+                name: 'MacBook Air M3 13-inch 8GB/256GB',
+                price: 'Rp 16.999.000',
+                originalPrice: 'Rp 18.999.000',
+                rating: 4.9,
+                reviews: 890,
+                image: 'https://raw.githubusercontent.com/kongali1720/kongali1720.github.io/main/Macbook.png',
+                category: 'electronics',
+                discount: 11,
+                seller: 'iBox Official',
+                location: 'Jakarta Selatan'
+            },
+            {
+                id: 3,
+                name: 'Nike Air Jordan 1 Retro High OG',
+                price: 'Rp 2.499.000',
+                originalPrice: 'Rp 2.999.000',
+                rating: 4.7,
+                reviews: 2341,
+                image: 'https://raw.githubusercontent.com/kongali1720/kongali1720.github.io/main/NikeAir-jordan.png',
+                category: 'fashion',
+                discount: 17,
+                seller: 'Nike Official',
+                location: 'Bandung'
+            },
+            {
+                id: 4,
+                name: 'Samsung Galaxy S24 Ultra 512GB',
+                price: 'Rp 19.999.000',
+                originalPrice: 'Rp 22.999.000',
+                rating: 4.8,
+                reviews: 1876,
+                image: 'https://raw.githubusercontent.com/kongali1720/kongali1720.github.io/main/samsung-HP.png',
+                category: 'electronics',
+                discount: 13,
+                seller: 'Samsung Store',
+                location: 'Jakarta'
+            },
+            {
+                id: 5,
+                name: 'Sony WH-1000XM5 Headphones',
+                price: 'Rp 4.999.000',
+                originalPrice: 'Rp 5.999.000',
+                rating: 4.9,
+                reviews: 987,
+                image: 'https://raw.githubusercontent.com/kongali1720/kongali1720.github.io/main/Sony-wh1000xm51.png',
+                category: 'electronics',
+                discount: 17,
+                seller: 'Sony Official',
+                location: 'Surabaya'
+            },
+            {
+                id: 6,
+                name: 'Adidas Ultraboost 22 Running Shoes',
+                price: 'Rp 2.799.000',
+                originalPrice: 'Rp 3.299.000',
+                rating: 4.6,
+                reviews: 1456,
+                image: 'https://raw.githubusercontent.com/kongali1720/kongali1720.github.io/main/adidas.png',
+                category: 'sports',
+                discount: 15,
+                seller: 'Adidas Store',
+                location: 'Medan'
+            }
+        ];
+
+        // Initialize state variables
+        let cartState = JSON.parse(localStorage.getItem('zl-market-cart') || '[]');
+        let wishlistState = JSON.parse(localStorage.getItem('zl-market-wishlist') || '[]');
+        let isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
         
-        // Video demo modal functionality
-        const demoBtn = document.getElementById('demo-btn');
-        const videoModal = document.getElementById('video-modal');
-        const closeModal = document.getElementById('close-modal');
-        const demoVideo = document.getElementById('demo-video');
+        // Cart functions
+        const addToCartHook = (product) => {
+            const existingItem = cartState.find(item => item.id === product.id);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cartState.push({ ...product, quantity: 1 });
+            }
+            localStorage.setItem('zl-market-cart', JSON.stringify(cartState));
+        };
         
-        // Video URL - ganti dengan URL video demo marketplace Anda
-        const videoUrl = 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&rel=0&modestbranding=1';
-        // Contoh alternatif untuk video lokal:
-        // const videoUrl = 'https://your-domain.com/demo-video.mp4';
+        const removeFromCart = (productId) => {
+            cartState = cartState.filter(item => item.id !== productId);
+            localStorage.setItem('zl-market-cart', JSON.stringify(cartState));
+        };
         
-        if (demoBtn && videoModal && closeModal && demoVideo) {
-            demoBtn.addEventListener('click', function() {
-                demoVideo.src = videoUrl;
-                videoModal.classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
-            });
+        const updateQuantity = (productId, quantity) => {
+            if (quantity <= 0) {
+                removeFromCart(productId);
+                return;
+            }
+            const item = cartState.find(item => item.id === productId);
+            if (item) {
+                item.quantity = quantity;
+                localStorage.setItem('zl-market-cart', JSON.stringify(cartState));
+            }
+        };
+        
+        // Wishlist functions
+        const toggleWishlistHook = (product) => {
+            const existingItem = wishlistState.find(item => item.id === product.id);
+            if (existingItem) {
+                wishlistState = wishlistState.filter(item => item.id !== product.id);
+            } else {
+                wishlistState.push(product);
+            }
+            localStorage.setItem('zl-market-wishlist', JSON.stringify(wishlistState));
+        };
+        
+        // Getter functions
+        const cart = () => cartState;
+        const wishlist = () => wishlistState;
+        
+        let currentCategory = 'all';
+        let searchQuery = '';
+
+
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProducts();
+            loadFlashSaleProducts();
+            startCountdown();
+            setupEventListeners();
             
-            closeModal.addEventListener('click', function() {
-                videoModal.classList.add('hidden');
-                demoVideo.src = '';
-                document.body.style.overflow = 'auto';
-            });
-            
-            // Close modal when clicking outside
-            videoModal.addEventListener('click', function(e) {
-                if (e.target === videoModal) {
-                    videoModal.classList.add('hidden');
-                    demoVideo.src = '';
-                    document.body.style.overflow = 'auto';
-                }
-            });
-            
-            // Close modal with Escape key
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && !videoModal.classList.contains('hidden')) {
-                    videoModal.classList.add('hidden');
-                    demoVideo.src = '';
-                    document.body.style.overflow = 'auto';
-                }
-            });
-        }
-        
-        // Mobile menu toggle
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        
-        if (mobileMenuBtn && mobileMenu) {
-            mobileMenuBtn.addEventListener('click', function() {
+            // Initialize cart and wishlist counts
+            updateCartCount();
+            updateWishlistCount();
+        });
+
+        function setupEventListeners() {
+            // Mobile menu toggle
+            document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+                const mobileMenu = document.getElementById('mobileMenu');
                 mobileMenu.classList.toggle('hidden');
             });
-            
-            // Close mobile menu when clicking on links
-            document.querySelectorAll('#mobile-menu a').forEach(link => {
-                link.addEventListener('click', function() {
-                    mobileMenu.classList.add('hidden');
+
+            // Search functionality
+            document.getElementById('searchInput').addEventListener('input', function(e) {
+                searchQuery = e.target.value.toLowerCase();
+                loadProducts();
+            });
+
+            // Category filter
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active', 'bg-gray-900', 'text-white'));
+                    this.classList.add('active', 'bg-gray-900', 'text-white');
+                    currentCategory = this.dataset.category;
+                    loadProducts();
                 });
             });
-            
-            // Close mobile menu when clicking outside
-            document.addEventListener('click', function(event) {
-                if (!mobileMenuBtn.contains(event.target) && !mobileMenu.contains(event.target)) {
-                    mobileMenu.classList.add('hidden');
-                }
+
+            // Cart modal
+            document.getElementById('cartBtn').addEventListener('click', openCartModal);
+            document.getElementById('closeCartModal').addEventListener('click', closeCartModal);
+
+            // View mode toggle
+            document.getElementById('gridView').addEventListener('click', function() {
+                document.querySelectorAll('.grid-list-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                document.getElementById('productGrid').className = 'grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4';
+            });
+
+            document.getElementById('listView').addEventListener('click', function() {
+                document.querySelectorAll('.grid-list-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                document.getElementById('productGrid').className = 'grid gap-6 grid-cols-1';
             });
         }
 
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+        function loadProducts() {
+            const filteredProducts = products.filter(product => {
+                const matchesCategory = currentCategory === 'all' || product.category === currentCategory;
+                const matchesSearch = searchQuery === '' || product.name.toLowerCase().includes(searchQuery);
+                return matchesCategory && matchesSearch;
+            });
+
+            const productGrid = document.getElementById('productGrid');
+            productGrid.innerHTML = '';
+
+            if (filteredProducts.length === 0) {
+                productGrid.innerHTML = `
+                    <div class="col-span-full text-center py-16">
+                        <div class="text-gray-400 mb-4">
+                            <i class="fas fa-search text-6xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Produk tidak ditemukan</h3>
+                        <p class="text-gray-600">Coba ubah kata kunci pencarian atau kategori yang dipilih.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filteredProducts.forEach(product => {
+                const productCard = createProductCard(product);
+                productGrid.appendChild(productCard);
+            });
+        }
+
+        function loadFlashSaleProducts() {
+            const flashSaleProducts = products.filter(product => product.discount > 15).slice(0, 4);
+            const flashSaleContainer = document.getElementById('flashSaleProducts');
+            
+            flashSaleProducts.forEach(product => {
+                const productCard = createProductCard(product);
+                flashSaleContainer.appendChild(productCard);
+            });
+        }
+
+        function createProductCard(product) {
+            const isInWishlist = wishlistState.some(item => item.id === product.id);
+            
+            const card = document.createElement('div');
+            card.className = 'bg-white/95 backdrop-blur-sm rounded-lg overflow-hidden shadow-lg card-hover';
+            card.innerHTML = `
+                <div class="relative">
+                    <img src="${product.image}" alt="${product.name}" class="w-full h-56 object-cover">
+                    <div class="absolute inset-0 bg-black/5 opacity-0 hover:opacity-100 transition-opacity"></div>
+                    ${product.discount > 0 ? `<span class="absolute top-3 left-3 bg-red-500 text-white text-xs px-2 py-1 rounded">-${product.discount}%</span>` : ''}
+                    <button class="absolute top-3 right-3 bg-white/80 hover:bg-white rounded-full p-2 wishlist-btn" data-product='${JSON.stringify(product)}'>
+                        <i class="fas fa-heart ${isInWishlist ? 'text-red-500' : 'text-gray-500'}"></i>
+                    </button>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold text-gray-900 mb-2 line-clamp-2 h-12">${product.name}</h3>
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <span class="text-sm text-gray-600 ml-1">${product.rating} (${product.reviews})</span>
+                        </div>
+                        <div class="text-sm text-gray-500">
+                            <span class="font-medium">${product.seller}</span>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="flex items-baseline gap-2">
+                            <span class="text-2xl font-bold text-gray-900">${product.price}</span>
+                            ${product.originalPrice ? `<span class="text-sm text-gray-500 line-through">${product.originalPrice}</span>` : ''}
+                        </div>
+                    </div>
+                    <button class="w-full bg-gray-900 text-white py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors add-to-cart-btn" data-product='${JSON.stringify(product)}'>
+                        <i class="fas fa-shopping-cart mr-2"></i>
+                        Tambah Keranjang
+                    </button>
+                </div>
+            `;
+
+            // Add event listeners
+            card.querySelector('.add-to-cart-btn').addEventListener('click', function() {
+                addToCart(product);
+            });
+
+            card.querySelector('.wishlist-btn').addEventListener('click', function() {
+                toggleWishlist(product);
+                this.querySelector('i').classList.toggle('text-red-500');
+                this.querySelector('i').classList.toggle('text-gray-500');
+            });
+
+            return card;
+        }
+
+        function addToCart(product) {
+            addToCartHook(product);
+            updateCartCount();
+            showToast(`${product.name} ditambahkan ke keranjang`);
+        }
+
+        function toggleWishlist(product) {
+            toggleWishlistHook(product);
+            updateWishlistCount();
+        }
+
+        function updateCartCount() {
+            const count = cartState.reduce((total, item) => total + item.quantity, 0);
+            document.getElementById('cartCount').textContent = count;
+            const mobileCartCount = document.getElementById('mobileCartCount');
+            if (mobileCartCount) {
+                mobileCartCount.textContent = count;
+            }
+        }
+
+        function updateWishlistCount() {
+            const count = wishlistState.length;
+            document.getElementById('wishlistCount').textContent = count;
+            const mobileWishlistCount = document.getElementById('mobileWishlistCount');
+            if (mobileWishlistCount) {
+                mobileWishlistCount.textContent = count;
+            }
+        }
+
+        function openCartModal() {
+            document.getElementById('cartModal').classList.remove('hidden');
+            loadCartItems();
+        }
+
+        function closeCartModal() {
+            document.getElementById('cartModal').classList.add('hidden');
+        }
+
+        function loadCartItems() {
+            const cartItemsContainer = document.getElementById('cartItems');
+            
+            if (cartState.length === 0) {
+                cartItemsContainer.innerHTML = `
+                    <div class="text-center py-8 text-gray-500">
+                        <i class="fas fa-shopping-cart text-4xl mb-4"></i>
+                        <p>Keranjang Anda kosong</p>
+                    </div>
+                `;
+                document.getElementById('cartTotal').textContent = 'Rp 0';
+                return;
+            }
+
+            let total = 0;
+            cartItemsContainer.innerHTML = '';
+
+            cartState.forEach(item => {
+                const price = parseFloat(item.price.replace(/[^0-9]/g, ''));
+                const itemTotal = price * item.quantity;
+                total += itemTotal;
+
+                const cartItem = document.createElement('div');
+                cartItem.className = 'flex items-center gap-4 py-4 border-b';
+                cartItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded">
+                    <div class="flex-1">
+                        <h4 class="font-medium line-clamp-2">${item.name}</h4>
+                        <p class="text-gray-600">${item.price}</p>
+                        <div class="flex items-center gap-2 mt-2">
+                            <button class="decrease-qty bg-gray-200 rounded px-2 py-1" data-id="${item.id}">-</button>
+                            <span class="mx-2">${item.quantity}</span>
+                            <button class="increase-qty bg-gray-200 rounded px-2 py-1" data-id="${item.id}">+</button>
+                        </div>
+                    </div>
+                    <button class="remove-item text-red-500 hover:text-red-700" data-id="${item.id}">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                `;
+
+                // Add event listeners
+                cartItem.querySelector('.increase-qty').addEventListener('click', function() {
+                    updateQuantity(item.id, item.quantity + 1);
+                    updateCartCount();
+                    loadCartItems();
+                });
+
+                cartItem.querySelector('.decrease-qty').addEventListener('click', function() {
+                    updateQuantity(item.id, item.quantity - 1);
+                    updateCartCount();
+                    loadCartItems();
+                });
+
+                cartItem.querySelector('.remove-item').addEventListener('click', function() {
+                    removeFromCart(item.id);
+                    updateCartCount();
+                    loadCartItems();
+                });
+
+                cartItemsContainer.appendChild(cartItem);
+            });
+
+            document.getElementById('cartTotal').textContent = `Rp ${total.toLocaleString('id-ID')}`;
+        }
+
+        function showToast(message) {
+            // Simple toast notification
+            const toast = document.createElement('div');
+            toast.className = 'fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+
+        function startCountdown() {
+            const targetDate = new Date();
+            targetDate.setHours(targetDate.getHours() + 5);
+
+            function updateCountdownDisplay() {
+                const now = new Date().getTime();
+                const distance = targetDate.getTime() - now;
+
+                if (distance < 0) {
+                    document.getElementById('countdown').innerHTML = '<span class="text-red-500 font-semibold">Flash Sale Telah Berakhir!</span>';
+                    return;
                 }
+
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            }
+
+            updateCountdownDisplay();
+            setInterval(updateCountdownDisplay, 1000);
+        }
+        
+        // Show seller registration modal
+        function showSellerRegistrationModal() {
+            console.log('showSellerRegistrationModal called! isLoggedIn:', isLoggedIn, 'currentUser:', currentUser);
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            modal.innerHTML = `
+                <div class="bg-white rounded-xl p-6 max-w-md w-full mx-4 max-h-[90vh] overflow-y-auto">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-bold">Daftar Sebagai Seller</h2>
+                        <button onclick="this.closest('.fixed').remove()" class="text-gray-500 hover:text-gray-700">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="text-center mb-6">
+                        <div class="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-store text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Mulai Jualan di ZL Market Place</h3>
+                        <p class="text-gray-600 text-sm">Bergabunglah dengan ribuan seller sukses dan raih penghasilan lebih!</p>
+                    </div>
+                    
+                    <div class="space-y-4 mb-6">
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                            <div>
+                                <h4 class="font-semibold text-sm">Komisi Rendah</h4>
+                                <p class="text-gray-600 text-xs">Hanya 2.5% per transaksi</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                            <div>
+                                <h4 class="font-semibold text-sm">Dashboard Lengkap</h4>
+                                <p class="text-gray-600 text-xs">Kelola toko dan analisis penjualan</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                            <div>
+                                <h4 class="font-semibold text-sm">Support 24/7</h4>
+                                <p class="text-gray-600 text-xs">Tim support siap membantu kapan saja</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    ${isLoggedIn ? `
+                        <form onsubmit="handleSellerRegistration(event)">
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Nama Toko</label>
+                                    <input type="text" name="storeName" required class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="Masukkan nama toko Anda">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Kategori Utama</label>
+                                    <select name="category" required class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                        <option value="">Pilih kategori</option>
+                                        <option value="electronics">Elektronik</option>
+                                        <option value="fashion">Fashion</option>
+                                        <option value="home">Rumah & Taman</option>
+                                        <option value="sports">Olahraga</option>
+                                        <option value="books">Buku</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Nomor WhatsApp</label>
+                                    <input type="tel" name="whatsapp" required class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="08xxxxxxxxxx">
+                                </div>
+                                <button type="submit" class="w-full bg-green-500 text-white py-3 rounded-lg hover:bg-green-600 transition-colors">
+                                    <i class="fas fa-store mr-2"></i>
+                                    Daftar Sekarang
+                                </button>
+                            </div>
+                        </form>
+                    ` : `
+                        <div class="text-center">
+                            <p class="text-gray-600 mb-4">Silakan login terlebih dahulu untuk mendaftar sebagai seller</p>
+                            <button onclick="this.closest('.fixed').remove(); showLoginForm();" class="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition-colors">
+                                <i class="fas fa-sign-in-alt mr-2"></i>
+                                Login Dulu
+                            </button>
+                        </div>
+                    `}
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+        }
+        
+        function handleSellerRegistration(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const storeName = formData.get('storeName');
+            const category = formData.get('category');
+            const whatsapp = formData.get('whatsapp');
+            
+            // Simulate seller registration
+            const sellerData = {
+                storeName: storeName,
+                category: category,
+                whatsapp: whatsapp,
+                registeredAt: new Date().toISOString(),
+                status: 'pending'
+            };
+            
+            localStorage.setItem('sellerData', JSON.stringify(sellerData));
+            
+            document.querySelector('.fixed').remove();
+            showToast('Pendaftaran seller berhasil! Tim kami akan menghubungi Anda dalam 1x24 jam.');
+        }
+        
+        // Scroll to products section
+        function scrollToProducts() {
+            const productsSection = document.getElementById('productsSection');
+            if (productsSection) {
+                productsSection.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            } else {
+                // Fallback - scroll to a reasonable position
+                window.scrollTo({ 
+                    top: 600, 
+                    behavior: 'smooth' 
+                });
+            }
+            showToast('Selamat berbelanja di ZL Market Place! 🛍️');
+        }
+        
+        // Show profile modal
+        function showProfileModal() {
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            modal.innerHTML = `
+                <div class="bg-white rounded-xl p-6 max-w-md w-full mx-4 transform transition-all">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-bold">Profil Pengguna</h2>
+                        <button onclick="this.closest('.fixed').remove()" class="text-gray-500 hover:text-gray-700">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    
+                    ${isLoggedIn ? `
+                        <div class="text-center mb-6">
+                            <div class="w-20 h-20 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-user text-white text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold">${currentUser?.name || 'User'}</h3>
+                            <p class="text-gray-500">${currentUser?.email || 'user@example.com'}</p>
+                        </div>
+                        
+                        <div class="space-y-3 mb-6">
+                            <button class="w-full flex items-center justify-start p-3 hover:bg-gray-100 rounded-lg">
+                                <i class="fas fa-shopping-bag w-5 h-5 mr-3 text-blue-500"></i>
+                                <span>Pesanan Saya</span>
+                            </button>
+                            <button onclick="this.closest('.fixed').remove(); showWishlistModal();" class="w-full flex items-center justify-start p-3 hover:bg-gray-100 rounded-lg">
+                                <i class="fas fa-heart w-5 h-5 mr-3 text-red-500"></i>
+                                <span>Wishlist (${wishlistState.length})</span>
+                            </button>
+                            <button class="w-full flex items-center justify-start p-3 hover:bg-gray-100 rounded-lg">
+                                <i class="fas fa-cog w-5 h-5 mr-3 text-gray-500"></i>
+                                <span>Pengaturan</span>
+                            </button>
+                        </div>
+                        
+                        <button onclick="logout()" class="w-full bg-red-500 text-white py-3 rounded-lg hover:bg-red-600 transition-colors">
+                            <i class="fas fa-sign-out-alt mr-2"></i>
+                            Logout
+                        </button>
+                    ` : `
+                        <div class="text-center mb-6">
+                            <div class="w-20 h-20 bg-gray-300 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-user text-gray-600 text-2xl"></i>
+                            </div>
+                            <p class="text-gray-600 mb-4">Silakan login untuk mengakses fitur lengkap</p>
+                        </div>
+                        
+                        <div class="space-y-3">
+                            <button onclick="showLoginForm()" class="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition-colors">
+                                <i class="fas fa-sign-in-alt mr-2"></i>
+                                Login
+                            </button>
+                            <button onclick="showRegisterForm()" class="w-full border border-blue-500 text-blue-500 py-3 rounded-lg hover:bg-blue-50 transition-colors">
+                                <i class="fas fa-user-plus mr-2"></i>
+                                Daftar
+                            </button>
+                        </div>
+                    `}
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+        }
+        
+        // Show wishlist modal
+        function showWishlistModal() {
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            
+            const wishlistItems = products.filter(product => wishlistState.includes(product.id));
+            
+            modal.innerHTML = `
+                <div class="bg-white rounded-xl p-6 max-w-2xl w-full mx-4 max-h-[80vh] overflow-y-auto">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-bold">Wishlist Saya</h2>
+                        <button onclick="this.closest('.fixed').remove()" class="text-gray-500 hover:text-gray-700">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    
+                    ${wishlistItems.length === 0 ? `
+                        <div class="text-center py-12">
+                            <i class="fas fa-heart text-gray-300 text-6xl mb-4"></i>
+                            <p class="text-gray-500 text-lg">Wishlist kosong</p>
+                            <p class="text-gray-400">Tambahkan produk favorit Anda</p>
+                        </div>
+                    ` : `
+                        <div class="space-y-4">
+                            ${wishlistItems.map(product => `
+                                <div class="flex items-center space-x-4 p-4 border rounded-lg">
+                                    <img src="${product.image}" alt="${product.name}" class="w-16 h-16 object-cover rounded">
+                                    <div class="flex-1">
+                                        <h3 class="font-semibold">${product.name}</h3>
+                                        <p class="text-blue-600 font-bold">Rp ${product.price.toLocaleString()}</p>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <button onclick="addToCartHook(${JSON.stringify(product).replace(/"/g, '&quot;')}); showToast('Produk ditambahkan ke keranjang!');" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+                                            <i class="fas fa-cart-plus"></i>
+                                        </button>
+                                        <button onclick="toggleWishlistHook(${product.id}); this.closest('.fixed').remove(); showToast('Produk dihapus dari wishlist!');" class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `}
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+        }
+        
+        // Login functions
+        function showLoginForm() {
+            const existingModal = document.querySelector('.fixed');
+            if (existingModal) existingModal.remove();
+            
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            modal.innerHTML = `
+                <div class="bg-white rounded-xl p-6 max-w-md w-full mx-4">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-bold">Login</h2>
+                        <button onclick="this.closest('.fixed').remove()" class="text-gray-500 hover:text-gray-700">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    
+                    <form onsubmit="handleLogin(event)">
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Email</label>
+                                <input type="email" name="email" required class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Email Anda">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Password</label>
+                                <input type="password" name="password" required class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Password Anda">
+                            </div>
+                            <button type="submit" class="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition-colors">
+                                Login
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <p class="text-center mt-4 text-gray-600">
+                        Belum punya akun? 
+                        <button onclick="showRegisterForm()" class="text-blue-500 hover:underline">Daftar disini</button>
+                    </p>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+        }
+        
+        function showRegisterForm() {
+            const existingModal = document.querySelector('.fixed');
+            if (existingModal) existingModal.remove();
+            
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            modal.innerHTML = `
+                <div class="bg-white rounded-xl p-6 max-w-md w-full mx-4">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-bold">Daftar Akun</h2>
+                        <button onclick="this.closest('.fixed').remove()" class="text-gray-500 hover:text-gray-700">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    
+                    <form onsubmit="handleRegister(event)">
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Nama Lengkap</label>
+                                <input type="text" name="name" required class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Nama Lengkap">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Email</label>
+                                <input type="email" name="email" required class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Email Anda">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Password</label>
+                                <input type="password" name="password" required class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Password">
+                            </div>
+                            <button type="submit" class="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition-colors">
+                                Daftar
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <p class="text-center mt-4 text-gray-600">
+                        Sudah punya akun? 
+                        <button onclick="showLoginForm()" class="text-blue-500 hover:underline">Login disini</button>
+                    </p>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+        }
+        
+        function handleLogin(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const email = formData.get('email');
+            const password = formData.get('password');
+            
+            // Simulate login (in real app, this would be API call)
+            currentUser = {
+                id: 1,
+                name: email.split('@')[0],
+                email: email
+            };
+            
+            isLoggedIn = true;
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            
+            document.querySelector('.fixed').remove();
+            showToast('Login berhasil!');
+        }
+        
+        function handleRegister(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            
+            // Simulate registration (in real app, this would be API call)
+            currentUser = {
+                id: Date.now(),
+                name: name,
+                email: email
+            };
+            
+            isLoggedIn = true;
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            
+            document.querySelector('.fixed').remove();
+            showToast('Akun berhasil dibuat dan Anda sudah login!');
+        }
+        
+        function logout() {
+            isLoggedIn = false;
+            currentUser = null;
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('currentUser');
+            
+            document.querySelector('.fixed').remove();
+            showToast('Logout berhasil!');
+        }
+
+        // Initialize all interactive features
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hero buttons
+            const startShoppingBtn = document.getElementById('startShoppingBtn');
+            const becomeSellerBtn = document.getElementById('becomeSellerBtn');
+            
+            startShoppingBtn?.addEventListener('click', () => {
+                scrollToProducts();
+            });
+            
+            becomeSellerBtn?.addEventListener('click', () => {
+                console.log('Seller button clicked! isLoggedIn:', isLoggedIn);
+                showSellerRegistrationModal();
+            });
+            
+            // Desktop buttons
+            const cartBtn = document.getElementById('cartBtn');
+            const wishlistBtn = document.getElementById('wishlistBtn');
+            const profileBtn = document.getElementById('profileBtn');
+            
+            cartBtn?.addEventListener('click', () => {
+                showCartModal();
+            });
+            
+            wishlistBtn?.addEventListener('click', () => {
+                showWishlistModal();
+            });
+            
+            profileBtn?.addEventListener('click', () => {
+                showProfileModal();
+            });
+            
+            // Mobile buttons
+            const mobileCartBtn = document.getElementById('mobileCartBtn');
+            const mobileWishlistBtn = document.getElementById('mobileWishlistBtn');
+            const mobileProfileBtn = document.getElementById('mobileProfileBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            mobileCartBtn?.addEventListener('click', () => {
+                showCartModal();
+                mobileMenu.classList.add('hidden');
+            });
+            
+            mobileWishlistBtn?.addEventListener('click', () => {
+                showWishlistModal();
+                mobileMenu.classList.add('hidden');
+            });
+            
+            mobileProfileBtn?.addEventListener('click', () => {
+                showProfileModal();
+                mobileMenu.classList.add('hidden');
             });
         });
-
-        // Add some interactive animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-fade-in');
-                }
-            });
-        });
-
-        document.querySelectorAll('.card-hover').forEach(card => {
-            observer.observe(card);
-        });
+        
+        // Additional styling for active states
+        const style = document.createElement('style');
+        style.textContent = `
+            .category-btn.active {
+                background-color: #1f2937;
+                color: white;
+            }
+            .grid-list-btn.active {
+                background-color: #f3f4f6;
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>

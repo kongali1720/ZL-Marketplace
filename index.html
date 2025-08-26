@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZL Market Place - Platform E-Commerce Masa Depan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .card-hover { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <img src="https://raw.githubusercontent.com/kongali1720/kongali1720.github.io/main/zl-marketplace-logo.jpeg" alt="ZL Market Place" class="w-10 h-10 rounded-lg object-contain">
+                        <span class="ml-3 text-xl font-bold text-gray-800">Market Place</span>
+                    </div>
+                </div>
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#features" class="text-gray-700 hover:text-purple-600 font-medium">Fitur</a>
+                    <a href="#business" class="text-gray-700 hover:text-purple-600 font-medium">Bisnis Model</a>
+                    <a href="#market" class="text-gray-700 hover:text-purple-600 font-medium">Peluang Pasar</a>
+                    <a href="#investment" class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition">Investasi</a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-purple-600 p-2">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200 shadow-lg">
+            <div class="px-4 py-6 space-y-4">
+                <a href="#features" class="block text-gray-700 hover:text-purple-600 font-medium py-2 border-b border-gray-100">Fitur</a>
+                <a href="#business" class="block text-gray-700 hover:text-purple-600 font-medium py-2 border-b border-gray-100">Bisnis Model</a>
+                <a href="#market" class="block text-gray-700 hover:text-purple-600 font-medium py-2 border-b border-gray-100">Peluang Pasar</a>
+                <a href="#investment" class="block bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition text-center mt-4">Investasi</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="text-white pt-20" style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%), url('https://raw.githubusercontent.com/kongali1720/kongali1720.github.io/main/background-marketplace.jpeg') center/cover;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <!-- Large Centered Logo -->
+                    <div class="flex justify-center mb-8">
+                        <img src="https://raw.githubusercontent.com/kongali1720/kongali1720.github.io/main/zl-marketplace-logo.jpeg" 
+                             alt="ZL Market Place Logo" 
+                             class="w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 object-contain"
+                             style="filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3)); mix-blend-mode: darken; opacity: 0.95;">
+                    </div>
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 text-center">Platform E-Commerce Terdepan untuk Generasi Digital</h1>
+                    <p class="text-lg lg:text-xl mb-8 text-purple-100 text-center">ZL Market Place menghubungkan jutaan pembeli dan penjual dengan teknologi AI terdepan, sistem pembayaran terintegrasi, dan pengalaman berbelanja yang revolusioner.</p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button id="demo-btn" class="bg-white text-purple-600 px-6 sm:px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition text-center flex items-center justify-center">
+                            <i data-lucide="play" class="w-4 h-4 mr-2"></i>
+                            Lihat Demo Video
+                        </button>
+                        <button class="border-2 border-white text-white px-6 sm:px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-purple-600 transition text-center flex items-center justify-center">
+                            <i data-lucide="download" class="w-4 h-4 mr-2"></i>
+                            Download Pitch Deck
+                        </button>
+                    </div>
+                </div>
+                <div class="lg:text-right">
+                    <img src="https://raw.githubusercontent.com/kongali1720/kongali1720.github.io/main/zl-marketplace-hero.jpeg" alt="ZL Market Place Platform" class="rounded-lg shadow-2xl w-full max-w-lg mx-auto lg:mx-0">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Market Opportunity -->
+    <section id="market" class="py-20 relative" style="background: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)), url('https://raw.githubusercontent.com/kongali1720/kongali1720.github.io/main/background-marketplace.jpeg') center/cover;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Peluang Pasar yang Menggiurkan</h2>
+                <p class="text-xl text-gray-600">Industri e-commerce Indonesia tumbuh 30% per tahun dengan nilai pasar $50 miliar</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-purple-600 mb-2">$50B</div>
+                    <div class="text-gray-700">Nilai Pasar E-commerce Indonesia</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-purple-600 mb-2">30%</div>
+                    <div class="text-gray-700">Pertumbuhan Tahunan</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-purple-600 mb-2">270M</div>
+                    <div class="text-gray-700">Populasi Indonesia</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-purple-600 mb-2">60%</div>
+                    <div class="text-gray-700">Penetrasi Internet</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Structure Section -->
+    <section class="py-16 sm:py-20 relative" style="background: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)), url('https://raw.githubusercontent.com/kongali1720/kongali1720.github.io/main/background-marketplace.jpeg') center/cover;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 sm:mb-16">
+                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Struktur Proyek Enterprise-Ready</h2>
+                <p class="text-base sm:text-lg lg:text-xl text-gray-600 px-4">Arsitektur modular dan scalable untuk pertumbuhan jangka panjang</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12">
+                <!-- Backend Structure -->
+                <div class="bg-gray-50 p-4 sm:p-6 lg:p-8 rounded-xl">
+                    <div class="flex items-center mb-6">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <i data-lucide="server" class="w-5 h-5 sm:w-6 sm:h-6 text-blue-600"></i>
+                        </div>
+                        <h3 class="text-lg sm:text-xl font-bold ml-4">Backend Architecture</h3>
+                    </div>
+                    <div class="space-y-2 sm:space-y-3 text-xs sm:text-sm font-mono overflow-x-auto">
+                        <div class="pl-3 sm:pl-4 border-l-2 border-blue-200">
+                            <div class="font-semibold text-blue-800">📂 backend/</div>
+                            <div class="ml-3 sm:ml-4 space-y-1">
+                                <div>├── app/</div>
+                                <div class="ml-3 sm:ml-4 space-y-1 text-xs">
+                                    <div>├── models/ <span class="text-gray-500 hidden sm:inline"># User, Product, Order</span></div>
+                                    <div>├── routes/ <span class="text-gray-500 hidden sm:inline"># API endpoints</span></div>
+                                    <div>├── services/ <span class="text-gray-500 hidden sm:inline"># Business logic</span></div>
+                                    <div>├── utils/ <span class="text-gray-500 hidden sm:inline"># Helpers</span></div>
+                                    <div>└── config/ <span class="text-gray-500 hidden sm:inline"># Settings</span></div>
+                                </div>
+                                <div>├── tests/ <span class="text-gray-500 hidden sm:inline"># Unit & Integration</span></div>
+                                <div>└── requirements.txt</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Frontend Structure -->
+                <div class="bg-gray-50 p-4 sm:p-6 lg:p-8 rounded-xl">
+                    <div class="flex items-center mb-6">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                            <i data-lucide="monitor" class="w-5 h-5 sm:w-6 sm:h-6 text-purple-600"></i>
+                        </div>
+                        <h3 class="text-lg sm:text-xl font-bold ml-4">Frontend Architecture</h3>
+                    </div>
+                    <div class="space-y-2 sm:space-y-3 text-xs sm:text-sm font-mono overflow-x-auto">
+                        <div class="pl-3 sm:pl-4 border-l-2 border-purple-200">
+                            <div class="font-semibold text-purple-800">📂 frontend/</div>
+                            <div class="ml-3 sm:ml-4 space-y-1">
+                                <div>├── public/ <span class="text-gray-500 hidden sm:inline"># Static files</span></div>
+                                <div>├── src/</div>
+                                <div class="ml-3 sm:ml-4 space-y-1 text-xs">
+                                    <div>├── components/ <span class="text-gray-500 hidden sm:inline"># Reusable UI</span></div>
+                                    <div>├── pages/ <span class="text-gray-500 hidden sm:inline"># Route pages</span></div>
+                                    <div>├── hooks/ <span class="text-gray-500 hidden sm:inline"># Custom hooks</span></div>
+                                    <div>├── services/ <span class="text-gray-500 hidden sm:inline"># API calls</span></div>
+                                    <div>└── context/ <span class="text-gray-500 hidden sm:inline"># State mgmt</span></div>
+                                </div>
+                                <div>└── package.json</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tech Stack -->
+            <div class="mt-12 sm:mt-16">
+                <h3 class="text-lg sm:text-xl font-bold text-center mb-6 sm:mb-8">Technology Stack Terpilih</h3>
+                <div class="grid grid-cols-3 sm:grid-cols-6 gap-4 sm:gap-6">
+                    <div class="text-center">
+                        <div class="w-12 h-12 sm:w-16 sm:h-16 mx-auto bg-green-100 rounded-lg flex items-center justify-center mb-2 sm:mb-3">
+                            <img src="keys/nodejs-logo?prompt=Node.js logo, green, simple" alt="Node.js" class="w-6 h-6 sm:w-10 sm:h-10">
+                        </div>
+                        <div class="text-xs sm:text-sm font-medium">Node.js</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-12 h-12 sm:w-16 sm:h-16 mx-auto bg-blue-100 rounded-lg flex items-center justify-center mb-2 sm:mb-3">
+                            <img src="keys/react-logo?prompt=React.js logo, blue, simple" alt="React" class="w-6 h-6 sm:w-10 sm:h-10">
+                        </div>
+                        <div class="text-xs sm:text-sm font-medium">React</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-12 h-12 sm:w-16 sm:h-16 mx-auto bg-blue-100 rounded-lg flex items-center justify-center mb-2 sm:mb-3">
+                            <img src="keys/postgres-logo?prompt=PostgreSQL logo, blue elephant, simple" alt="PostgreSQL" class="w-6 h-6 sm:w-10 sm:h-10">
+                        </div>
+                        <div class="text-xs sm:text-sm font-medium">PostgreSQL</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-12 h-12 sm:w-16 sm:h-16 mx-auto bg-red-100 rounded-lg flex items-center justify-center mb-2 sm:mb-3">
+                            <img src="keys/redis-logo?prompt=Redis logo, red, simple" alt="Redis" class="w-6 h-6 sm:w-10 sm:h-10">
+                        </div>
+                        <div class="text-xs sm:text-sm font-medium">Redis</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-12 h-12 sm:w-16 sm:h-16 mx-auto bg-blue-100 rounded-lg flex items-center justify-center mb-2 sm:mb-3">
+                            <img src="keys/docker-logo?prompt=Docker logo, blue whale, simple" alt="Docker" class="w-6 h-6 sm:w-10 sm:h-10">
+                        </div>
+                        <div class="text-xs sm:text-sm font-medium">Docker</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-12 h-12 sm:w-16 sm:h-16 mx-auto bg-orange-100 rounded-lg flex items-center justify-center mb-2 sm:mb-3">
+                            <img src="keys/aws-logo?prompt=AWS logo, orange, simple" alt="AWS" class="w-6 h-6 sm:w-10 sm:h-10">
+                        </div>
+                        <div class="text-xs sm:text-sm font-medium">AWS</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Development Roadmap -->
+    <section class="py-16 sm:py-20 relative" style="background: linear-gradient(rgba(249, 250, 251, 0.95), rgba(249, 250, 251, 0.95)), url('https://raw.githubusercontent.com/kongali1720/kongali1720.github.io/main/background-marketplace.jpeg') center/cover;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 sm:mb-16">
+                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Roadmap Pengembangan</h2>
+                <p class="text-base sm:text-lg lg:text-xl text-gray-600 px-4">Timeline eksekusi dari MVP hingga IPO dalam 5 tahun</p>
+            </div>
+            
+            <div class="relative">
+                <!-- Timeline line - hidden on mobile -->
+                <div class="absolute left-1/2 transform -translate-x-0.5 w-1 h-full bg-purple-200 hidden lg:block"></div>
+                
+                <div class="space-y-8 sm:space-y-12">
+                    <!-- Phase 1 -->
+                    <div class="flex flex-col lg:flex-row items-center">
+                        <div class="w-full lg:w-1/2 lg:pr-8 mb-6 lg:mb-0">
+                            <div class="bg-white p-4 sm:p-6 rounded-xl shadow-lg">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                        <span class="text-green-600 font-bold text-sm sm:text-base">1</span>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h3 class="text-lg sm:text-xl font-bold">Bulan 1-3: MVP Development</h3>
+                                        <p class="text-sm sm:text-base text-gray-600">Foundation & Core Features</p>
+                                    </div>
+                                </div>
+                                <ul class="space-y-2 text-xs sm:text-sm">
+                                    <li class="flex items-center"><i data-lucide="check" class="w-3 h-3 sm:w-4 sm:h-4 text-green-500 mr-2 flex-shrink-0"></i>Backend API development</li>
+                                    <li class="flex items-center"><i data-lucide="check" class="w-3 h-3 sm:w-4 sm:h-4 text-green-500 mr-2 flex-shrink-0"></i>Frontend marketplace UI</li>
+                                    <li class="flex items-center"><i data-lucide="check" class="w-3 h-3 sm:w-4 sm:h-4 text-green-500 mr-2 flex-shrink-0"></i>Basic payment integration</li>
+                                    <li class="flex items-center"><i data-lucide="check" class="w-3 h-3 sm:w-4 sm:h-4 text-green-500 mr-2 flex-shrink-0"></i>50 early adopter sellers</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="hidden lg:block w-8 h-8 bg-purple-600 rounded-full relative z-10"></div>
+                        <div class="w-full lg:w-1/2 lg:pl-8"></div>
+                    </div>
+                    
+                    <!-- Phase 2 -->
+                    <div class="flex flex-col lg:flex-row items-center">
+                        <div class="w-full lg:w-1/2 lg:pr-8 lg:order-1"></div>
+                        <div class="hidden lg:block w-8 h-8 bg-purple-600 rounded-full relative z-10"></div>
+                        <div class="w-full lg:w-1/2 lg:pl-8 mb-6 lg:mb-0">
+                            <div class="bg-white p-4 sm:p-6 rounded-xl shadow-lg">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                        <span class="text-blue-600 font-bold text-sm sm:text-base">2</span>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h3 class="text-lg sm:text-xl font-bold">Bulan 4-6: Feature Enhancement</h3>
+                                        <p class="text-sm sm:text-base text-gray-600">Advanced Functionality</p>
+                                    </div>
+                                </div>
+                                <ul class="space-y-2 text-xs sm:text-sm">
+                                    <li class="flex items-center"><i data-lucide="clock" class="w-3 h-3 sm:w-4 sm:h-4 text-blue-500 mr-2 flex-shrink-0"></i>Review & rating system</li>
+                                    <li class="flex items-center"><i data-lucide="clock" class="w-3 h-3 sm:w-4 sm:h-4 text-blue-500 mr-2 flex-shrink-0"></i>Real-time chat support</li>
+                                    <li class="flex items-center"><i data-lucide="clock" class="w-3 h-3 sm:w-4 sm:h-4 text-blue-500 mr-2 flex-shrink-0"></i>E-wallet integration</li>
+                                    <li class="flex items-center"><i data-lucide="clock" class="w-3 h-3 sm:w-4 sm:h-4 text-blue-500 mr-2 flex-shrink-0"></i>Promo & discount system</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Phase 3 -->
+                    <div class="flex flex-col lg:flex-row items-center">
+                        <div class="w-full lg:w-1/2 lg:pr-8 mb-6 lg:mb-0">
+                            <div class="bg-white p-4 sm:p-6 rounded-xl shadow-lg">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                        <span class="text-purple-600 font-bold text-sm sm:text-base">3</span>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h3 class="text-lg sm:text-xl font-bold">Tahun 2: Mobile & AI</h3>
+                                        <p class="text-sm sm:text-base text-gray-600">Scale & Intelligence</p>
+                                    </div>
+                                </div>
+                                <ul class="space-y-2 text-xs sm:text-sm">
+                                    <li class="flex items-center"><i data-lucide="smartphone" class="w-3 h-3 sm:w-4 sm:h-4 text-purple-500 mr-2 flex-shrink-0"></i>Native mobile apps</li>
+                                    <li class="flex items-center"><i data-lucide="brain" class="w-3 h-3 sm:w-4 sm:h-4 text-purple-500 mr-2 flex-shrink-0"></i>AI recommendation engine</li>
+                                    <li class="flex items-center"><i data-lucide="users" class="w-3 h-3 sm:w-4 sm:h-4 text-purple-500 mr-2 flex-shrink-0"></i>1000+ active sellers</li>
+                                    <li class="flex items-center"><i data-lucide="trending-up" class="w-3 h-3 sm:w-4 sm:h-4 text-purple-500 mr-2 flex-shrink-0"></i>Advanced analytics</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="hidden lg:block w-8 h-8 bg-purple-600 rounded-full relative z-10"></div>
+                        <div class="w-full lg:w-1/2 lg:pl-8"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="py-16 sm:py-20 relative" style="background: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)), url('https://raw.githubusercontent.com/kongali1720/kongali1720.github.io/main/background-marketplace.jpeg') center/cover;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 sm:mb-16">
+                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Fitur Unggulan yang Mengubah Permainan</h2>
+                <p class="text-base sm:text-lg lg:text-xl text-gray-600 px-4">Teknologi terdepan untuk pengalaman berbelanja yang tak terlupakan</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                <div class="bg-white p-6 lg:p-8 rounded-xl shadow-lg card-hover">
+                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-6">
+                        <i data-lucide="brain" class="w-6 h-6 text-purple-600"></i>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-semibold mb-4">AI-Powered Recommendations</h3>
+                    <p class="text-sm sm:text-base text-gray-600">Sistem rekomendasi berbasis AI yang mempersonalisasi pengalaman berbelanja setiap user dengan akurasi 95%.</p>
+                </div>
+                <div class="bg-white p-6 lg:p-8 rounded-xl shadow-lg card-hover">
+                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-6">
+                        <i data-lucide="shield-check" class="w-6 h-6 text-green-600"></i>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-semibold mb-4">Keamanan Tingkat Bank</h3>
+                    <p class="text-sm sm:text-base text-gray-600">Enkripsi end-to-end, fraud detection AI, dan sistem pembayaran yang terintegrasi dengan semua bank lokal.</p>
+                </div>
+                <div class="bg-white p-6 lg:p-8 rounded-xl shadow-lg card-hover">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-6">
+                        <i data-lucide="zap" class="w-6 h-6 text-blue-600"></i>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-semibold mb-4">Super Fast Performance</h3>
+                    <p class="text-sm sm:text-base text-gray-600">Loading time < 2 detik dengan CDN global dan arsitektur microservices yang scalable hingga jutaan user.</p>
+                </div>
+                <div class="bg-white p-6 lg:p-8 rounded-xl shadow-lg card-hover">
+                    <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-6">
+                        <i data-lucide="smartphone" class="w-6 h-6 text-yellow-600"></i>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-semibold mb-4">Mobile-First Design</h3>
+                    <p class="text-sm sm:text-base text-gray-600">Progressive Web App (PWA) dengan pengalaman native mobile, offline capability, dan push notifications.</p>
+                </div>
+                <div class="bg-white p-6 lg:p-8 rounded-xl shadow-lg card-hover">
+                    <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-6">
+                        <i data-lucide="truck" class="w-6 h-6 text-red-600"></i>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-semibold mb-4">Logistik Terintegrasi</h3>
+                    <p class="text-sm sm:text-base text-gray-600">Partnership dengan 15+ kurir nasional, real-time tracking, dan same-day delivery di 10 kota besar.</p>
+                </div>
+                <div class="bg-white p-6 lg:p-8 rounded-xl shadow-lg card-hover">
+                    <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-6">
+                        <i data-lucide="users" class="w-6 h-6 text-indigo-600"></i>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-semibold mb-4">Seller Tools Suite</h3>
+                    <p class="text-sm sm:text-base text-gray-600">Dashboard analytics, inventory management, marketing tools, dan automated customer service untuk seller.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Model -->
+    <section id="business" class="py-20 relative" style="background: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)), url('https://raw.githubusercontent.com/kongali1720/kongali1720.github.io/main/background-marketplace.jpeg') center/cover;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Model Bisnis yang Terbukti Menguntungkan</h2>
+                <p class="text-xl text-gray-600">Multiple revenue streams dengan margin yang sehat</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-purple-50 p-6 rounded-xl">
+                    <h3 class="text-lg font-semibold mb-2">Commission (3-5%)</h3>
+                    <p class="text-gray-600 mb-4">Fee dari setiap transaksi seller</p>
+                    <div class="text-2xl font-bold text-purple-600">60%</div>
+                    <div class="text-sm text-gray-500">dari total revenue</div>
+                </div>
+                <div class="bg-blue-50 p-6 rounded-xl">
+                    <h3 class="text-lg font-semibold mb-2">Payment Gateway</h3>
+                    <p class="text-gray-600 mb-4">Fee processing pembayaran</p>
+                    <div class="text-2xl font-bold text-blue-600">20%</div>
+                    <div class="text-sm text-gray-500">dari total revenue</div>
+                </div>
+                <div class="bg-green-50 p-6 rounded-xl">
+                    <h3 class="text-lg font-semibold mb-2">Advertising</h3>
+                    <p class="text-gray-600 mb-4">Sponsored products & banner ads</p>
+                    <div class="text-2xl font-bold text-green-600">15%</div>
+                    <div class="text-sm text-gray-500">dari total revenue</div>
+                </div>
+                <div class="bg-yellow-50 p-6 rounded-xl">
+                    <h3 class="text-lg font-semibold mb-2">Premium Services</h3>
+                    <p class="text-gray-600 mb-4">Seller tools, analytics, priority</p>
+                    <div class="text-2xl font-bold text-yellow-600">5%</div>
+                    <div class="text-sm text-gray-500">dari total revenue</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Investment Requirements -->
+    <section class="py-20 relative" style="background: linear-gradient(rgba(243, 244, 246, 0.95), rgba(243, 244, 246, 0.95)), url('https://raw.githubusercontent.com/kongali1720/kongali1720.github.io/main/background-marketplace.jpeg') center/cover;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Kebutuhan Modal & Penggunaan Dana</h2>
+                <p class="text-lg lg:text-xl text-gray-600 px-4">Total modal awal Rp 500 juta untuk membangun platform enterprise-grade</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Fund Usage Breakdown -->
+                <div class="space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-semibold text-lg">Development Platform</h3>
+                            <span class="text-2xl font-bold text-blue-600">40%</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-3">Backend API, Frontend UI, Mobile App Development</p>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-blue-600 h-2 rounded-full" style="width: 40%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-semibold text-lg">Marketing & Akuisisi</h3>
+                            <span class="text-2xl font-bold text-green-600">30%</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-3">User acquisition, seller onboarding, brand awareness</p>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-green-600 h-2 rounded-full" style="width: 30%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-semibold text-lg">Infrastructure & Security</h3>
+                            <span class="text-2xl font-bold text-orange-600">20%</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-3">Server, cloud hosting, security systems, SSL</p>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-orange-600 h-2 rounded-full" style="width: 20%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-semibold text-lg">Operations & Support</h3>
+                            <span class="text-2xl font-bold text-purple-600">10%</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-3">Customer service, legal, admin costs</p>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-purple-600 h-2 rounded-full" style="width: 10%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Investment Timeline -->
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <h3 class="text-xl font-bold mb-6 text-center">Timeline Investasi</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-center">
+                            <div class="w-4 h-4 bg-green-500 rounded-full mr-4"></div>
+                            <div>
+                                <h4 class="font-semibold">Pre-Seed: Rp 500 juta</h4>
+                                <p class="text-sm text-gray-600">MVP development & initial team</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-4 h-4 bg-blue-500 rounded-full mr-4"></div>
+                            <div>
+                                <h4 class="font-semibold">Seed: Rp 2 miliar</h4>
+                                <p class="text-sm text-gray-600">Market expansion & mobile app</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-4 h-4 bg-purple-500 rounded-full mr-4"></div>
+                            <div>
+                                <h4 class="font-semibold">Series A: Rp 10 miliar</h4>
+                                <p class="text-sm text-gray-600">AI features & national scale</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-4 h-4 bg-orange-500 rounded-full mr-4"></div>
+                            <div>
+                                <h4 class="font-semibold">Series B+: Rp 50+ miliar</h4>
+                                <p class="text-sm text-gray-600">Regional expansion & IPO prep</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Financial Projections -->
+    <section class="py-20 bg-gray-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Proyeksi Finansial 5 Tahun</h2>
+                <p class="text-xl text-gray-300">Target IPO pada tahun ke-5 dengan valuasi $1B</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-800 p-8 rounded-xl">
+                    <h3 class="text-2xl font-bold mb-6">Tahun 1-2: Growth</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between">
+                            <span>GMV</span>
+                            <span class="font-semibold">$10M - $50M</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Revenue</span>
+                            <span class="font-semibold">$0.5M - $2.5M</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Active Users</span>
+                            <span class="font-semibold">100K - 500K</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-800 p-8 rounded-xl">
+                    <h3 class="text-2xl font-bold mb-6">Tahun 3-4: Scale</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between">
+                            <span>GMV</span>
+                            <span class="font-semibold">$200M - $500M</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Revenue</span>
+                            <span class="font-semibold">$10M - $25M</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Active Users</span>
+                            <span class="font-semibold">2M - 5M</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-800 p-8 rounded-xl">
+                    <h3 class="text-2xl font-bold mb-6">Tahun 5: IPO Ready</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between">
+                            <span>GMV</span>
+                            <span class="font-semibold">$1B+</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Revenue</span>
+                            <span class="font-semibold">$50M+</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Active Users</span>
+                            <span class="font-semibold">10M+</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Investment Opportunity -->
+    <section id="investment" class="py-20 text-white relative" style="background: linear-gradient(rgba(147, 51, 234, 0.9), rgba(147, 51, 234, 0.9)), url('https://raw.githubusercontent.com/kongali1720/kongali1720.github.io/main/background-marketplace.jpeg') center/cover;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-bold mb-6">Peluang Investasi Terbatas</h2>
+            <p class="text-xl mb-12 text-purple-100">Series A: $5M untuk akuisisi user, teknologi AI, dan ekspansi ke 25 kota</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <div class="bg-purple-500 bg-opacity-50 p-6 rounded-xl">
+                    <h3 class="text-xl font-semibold mb-2">Use of Funds</h3>
+                    <div class="text-left space-y-2">
+                        <div class="flex justify-between">
+                            <span>Technology & AI</span>
+                            <span>40%</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Marketing & CAC</span>
+                            <span>35%</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Team & Operations</span>
+                            <span>20%</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Legal & Compliance</span>
+                            <span>5%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-purple-500 bg-opacity-50 p-6 rounded-xl">
+                    <h3 class="text-xl font-semibold mb-2">Expected ROI</h3>
+                    <div class="text-3xl font-bold mb-2">10-15x</div>
+                    <p class="text-purple-100">dalam 5 tahun berdasarkan komparasi Tokopedia, Shopee, dan Bukalapak</p>
+                </div>
+                <div class="bg-purple-500 bg-opacity-50 p-6 rounded-xl">
+                    <h3 class="text-xl font-semibold mb-2">Exit Strategy</h3>
+                    <div class="text-left space-y-2">
+                        <div>• IPO di BEI/NYSE</div>
+                        <div>• Strategic acquisition</div>
+                        <div>• Secondary sale</div>
+                        <div>• Management buyback</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-center space-x-6">
+                <button class="bg-white text-purple-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition">Jadwalkan Meeting</button>
+                <button class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-purple-600 transition">Download Executive Summary</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-white py-12 relative" style="background: linear-gradient(rgba(17, 24, 39, 0.95), rgba(17, 24, 39, 0.95)), url('https://raw.githubusercontent.com/kongali1720/kongali1720.github.io/main/background-marketplace.jpeg') center/cover;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <img src="https://raw.githubusercontent.com/kongali1720/kongali1720.github.io/main/zl-marketplace-logo.jpeg" alt="ZL Market Place" class="w-10 h-10 rounded-lg object-contain">
+                        <span class="ml-3 text-xl font-bold">Market Place</span>
+                    </div>
+                    <p class="text-gray-400">Platform e-commerce masa depan dengan teknologi AI terdepan.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Kontak</h4>
+                    <div class="space-y-2 text-gray-400">
+                        <p>Email: investor@zlmarketplace.com</p>
+                        <p>Phone: +62 811-2345-6789</p>
+                        <p>Jakarta, Indonesia</p>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Dokumen</h4>
+                    <div class="space-y-2">
+                        <a href="#" class="block text-gray-400 hover:text-white transition">Pitch Deck</a>
+                        <a href="#" class="block text-gray-400 hover:text-white transition">Financial Model</a>
+                        <a href="#" class="block text-gray-400 hover:text-white transition">Market Research</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Legal</h4>
+                    <div class="space-y-2">
+                        <a href="#" class="block text-gray-400 hover:text-white transition">Terms of Service</a>
+                        <a href="#" class="block text-gray-400 hover:text-white transition">Privacy Policy</a>
+                        <a href="#" class="block text-gray-400 hover:text-white transition">Investment Terms</a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 ZL Market Place. All rights reserved. Confidential Investment Presentation.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Video Demo Modal -->
+    <div id="video-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-hidden relative">
+            <div class="flex justify-between items-center p-4 border-b">
+                <h3 class="text-xl font-bold text-gray-900">ZL Market Place - Demo Video</h3>
+                <button id="close-modal" class="text-gray-500 hover:text-gray-700 p-2">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <div class="relative" style="padding-bottom: 56.25%; height: 0;">
+                <iframe id="demo-video" 
+                    class="absolute top-0 left-0 w-full h-full" 
+                    src="" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="p-4 bg-gray-50">
+                <p class="text-sm text-gray-600 mb-2">
+                    <i data-lucide="info" class="w-4 h-4 inline mr-1"></i>
+                    Contoh demo marketplace dengan fitur-fitur modern seperti yang akan diimplementasikan di ZL Market Place
+                </p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">E-commerce Platform</span>
+                    <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Multi-vendor</span>
+                    <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">Modern UI/UX</span>
+                    <span class="px-2 py-1 bg-orange-100 text-orange-800 text-xs rounded-full">Mobile Responsive</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+        
+        // Video demo modal functionality
+        const demoBtn = document.getElementById('demo-btn');
+        const videoModal = document.getElementById('video-modal');
+        const closeModal = document.getElementById('close-modal');
+        const demoVideo = document.getElementById('demo-video');
+        
+        // Video URL - ganti dengan URL video demo marketplace Anda
+        const videoUrl = 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&rel=0&modestbranding=1';
+        // Contoh alternatif untuk video lokal:
+        // const videoUrl = 'https://your-domain.com/demo-video.mp4';
+        
+        if (demoBtn && videoModal && closeModal && demoVideo) {
+            demoBtn.addEventListener('click', function() {
+                demoVideo.src = videoUrl;
+                videoModal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            closeModal.addEventListener('click', function() {
+                videoModal.classList.add('hidden');
+                demoVideo.src = '';
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Close modal when clicking outside
+            videoModal.addEventListener('click', function(e) {
+                if (e.target === videoModal) {
+                    videoModal.classList.add('hidden');
+                    demoVideo.src = '';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Close modal with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && !videoModal.classList.contains('hidden')) {
+                    videoModal.classList.add('hidden');
+                    demoVideo.src = '';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        }
+        
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // Close mobile menu when clicking on links
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+            
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!mobileMenuBtn.contains(event.target) && !mobileMenu.contains(event.target)) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add some interactive animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                }
+            });
+        });
+
+        document.querySelectorAll('.card-hover').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>

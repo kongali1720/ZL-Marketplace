@@ -63,8 +63,14 @@
                     <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">Platform E-Commerce Terdepan untuk Generasi Digital</h1>
                     <p class="text-lg lg:text-xl mb-8 text-purple-100">ZL Market Place menghubungkan jutaan pembeli dan penjual dengan teknologi AI terdepan, sistem pembayaran terintegrasi, dan pengalaman berbelanja yang revolusioner.</p>
                     <div class="flex flex-col sm:flex-row gap-4">
-                        <button class="bg-white text-purple-600 px-6 sm:px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition text-center">Lihat Demo</button>
-                        <button class="border-2 border-white text-white px-6 sm:px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-purple-600 transition text-center">Download Pitch Deck</button>
+                        <button id="demo-btn" class="bg-white text-purple-600 px-6 sm:px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition text-center flex items-center justify-center">
+                            <i data-lucide="play" class="w-4 h-4 mr-2"></i>
+                            Lihat Demo Video
+                        </button>
+                        <button class="border-2 border-white text-white px-6 sm:px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-purple-600 transition text-center flex items-center justify-center">
+                            <i data-lucide="download" class="w-4 h-4 mr-2"></i>
+                            Download Pitch Deck
+                        </button>
                     </div>
                 </div>
                 <div class="lg:text-right">
@@ -644,10 +650,86 @@
             </div>
         </div>
     </footer>
+    
+    <!-- Video Demo Modal -->
+    <div id="video-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-hidden relative">
+            <div class="flex justify-between items-center p-4 border-b">
+                <h3 class="text-xl font-bold text-gray-900">ZL Market Place - Demo Video</h3>
+                <button id="close-modal" class="text-gray-500 hover:text-gray-700 p-2">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <div class="relative" style="padding-bottom: 56.25%; height: 0;">
+                <iframe id="demo-video" 
+                    class="absolute top-0 left-0 w-full h-full" 
+                    src="" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="p-4 bg-gray-50">
+                <p class="text-sm text-gray-600 mb-2">
+                    <i data-lucide="info" class="w-4 h-4 inline mr-1"></i>
+                    Contoh demo marketplace dengan fitur-fitur modern seperti yang akan diimplementasikan di ZL Market Place
+                </p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">E-commerce Platform</span>
+                    <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Multi-vendor</span>
+                    <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">Modern UI/UX</span>
+                    <span class="px-2 py-1 bg-orange-100 text-orange-800 text-xs rounded-full">Mobile Responsive</span>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
         // Initialize Lucide icons
         lucide.createIcons();
+        
+        // Video demo modal functionality
+        const demoBtn = document.getElementById('demo-btn');
+        const videoModal = document.getElementById('video-modal');
+        const closeModal = document.getElementById('close-modal');
+        const demoVideo = document.getElementById('demo-video');
+        
+        // Video URL - ganti dengan URL video demo marketplace Anda
+        const videoUrl = 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&rel=0&modestbranding=1';
+        // Contoh alternatif untuk video lokal:
+        // const videoUrl = 'https://your-domain.com/demo-video.mp4';
+        
+        if (demoBtn && videoModal && closeModal && demoVideo) {
+            demoBtn.addEventListener('click', function() {
+                demoVideo.src = videoUrl;
+                videoModal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            closeModal.addEventListener('click', function() {
+                videoModal.classList.add('hidden');
+                demoVideo.src = '';
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Close modal when clicking outside
+            videoModal.addEventListener('click', function(e) {
+                if (e.target === videoModal) {
+                    videoModal.classList.add('hidden');
+                    demoVideo.src = '';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Close modal with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && !videoModal.classList.contains('hidden')) {
+                    videoModal.classList.add('hidden');
+                    demoVideo.src = '';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        }
         
         // Mobile menu toggle
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');

@@ -35,107 +35,6 @@
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
         }
     </style>
-    
-    <script>
-        // SIMPLE SELLER MODAL - DEFINED IN HEAD FOR EARLY ACCESS
-        function openSellerModal() {
-            console.log('🏪 SELLER MODAL CALLED!');
-            
-            // Remove existing modal
-            const existing = document.querySelector('.seller-modal-overlay');
-            if (existing) existing.remove();
-            
-            // Create modal HTML
-            const modal = document.createElement('div');
-            modal.className = 'seller-modal-overlay';
-            modal.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; display: flex; align-items: center; justify-content: center;';
-            
-            modal.innerHTML = `
-                <div style="background: white; border-radius: 12px; padding: 24px; max-width: 400px; width: 90%; margin: 20px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                        <h2 style="font-size: 20px; font-weight: bold; margin: 0;">Daftar Sebagai Seller</h2>
-                        <button onclick="document.querySelector('.seller-modal-overlay').remove()" style="background: none; border: none; font-size: 24px; cursor: pointer; color: #666;">×</button>
-                    </div>
-                    
-                    <div style="text-align: center; margin-bottom: 20px;">
-                        <div style="width: 60px; height: 60px; background: #10B981; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
-                            <i class="fas fa-store" style="color: white; font-size: 20px;"></i>
-                        </div>
-                        <h3 style="font-size: 18px; font-weight: 600; margin: 0 0 8px;">Mulai Jualan di ZL Market Place</h3>
-                        <p style="color: #666; font-size: 14px; margin: 0;">Bergabunglah dengan ribuan seller sukses!</p>
-                    </div>
-                    
-                    <form onsubmit="handleSellerForm(event)">
-                        <div style="margin-bottom: 16px;">
-                            <label style="display: block; font-size: 14px; font-weight: 500; margin-bottom: 4px;">Nama Toko</label>
-                            <input type="text" name="storeName" required style="width: 100%; padding: 8px 12px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box;" placeholder="Contoh: Toko Elektronik Jaya">
-                        </div>
-                        <div style="margin-bottom: 16px;">
-                            <label style="display: block; font-size: 14px; font-weight: 500; margin-bottom: 4px;">Kategori</label>
-                            <select name="category" required style="width: 100%; padding: 8px 12px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box;">
-                                <option value="">Pilih Kategori</option>
-                                <option value="elektronik">Elektronik</option>
-                                <option value="fashion">Fashion</option>
-                                <option value="otomotif">Otomotif</option>
-                                <option value="olahraga">Olahraga</option>
-                                <option value="lainnya">Lainnya</option>
-                            </select>
-                        </div>
-                        <div style="margin-bottom: 16px;">
-                            <label style="display: block; font-size: 14px; font-weight: 500; margin-bottom: 4px;">WhatsApp</label>
-                            <input type="tel" name="whatsapp" required style="width: 100%; padding: 8px 12px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box;" placeholder="08123456789">
-                        </div>
-                        <div style="margin-bottom: 20px; display: flex; align-items: center;">
-                            <input type="checkbox" id="agree" required style="margin-right: 8px;">
-                            <label for="agree" style="font-size: 14px; color: #666;">Saya setuju dengan syarat dan ketentuan</label>
-                        </div>
-                        <button type="submit" style="width: 100%; padding: 12px; background: #10B981; color: white; border: none; border-radius: 6px; font-size: 16px; font-weight: 600; cursor: pointer;">
-                            Daftar Sekarang
-                        </button>
-                    </form>
-                </div>
-            `;
-            
-            // Close on outside click
-            modal.addEventListener('click', function(e) {
-                if (e.target === modal) modal.remove();
-            });
-            
-            document.body.appendChild(modal);
-            console.log('✅ SELLER MODAL ADDED TO DOM!');
-        }
-        
-        function handleSellerForm(event) {
-            event.preventDefault();
-            const formData = new FormData(event.target);
-            
-            const data = {
-                storeName: formData.get('storeName'),
-                category: formData.get('category'),
-                whatsapp: formData.get('whatsapp'),
-                registeredAt: new Date().toISOString()
-            };
-            
-            localStorage.setItem('sellerRegistration', JSON.stringify(data));
-            document.querySelector('.seller-modal-overlay').remove();
-            
-            // Show success notification
-            const toast = document.createElement('div');
-            toast.style.cssText = 'position: fixed; top: 20px; right: 20px; background: #10B981; color: white; padding: 12px 20px; border-radius: 6px; z-index: 10000;';
-            toast.innerHTML = '<i class="fas fa-check-circle" style="margin-right: 8px;"></i>Pendaftaran seller berhasil!';
-            document.body.appendChild(toast);
-            
-            setTimeout(() => toast.remove(), 3000);
-            console.log('✅ SELLER REGISTRATION COMPLETED!');
-        }
-        
-        function scrollToProducts() {
-            const section = document.getElementById('productsSection');
-            if (section) {
-                section.scrollIntoView({behavior: 'smooth'});
-            }
-        }
-    </script>
 </head>
 <body class="min-h-screen bg-gray-50">
     <!-- Header -->
@@ -160,21 +59,21 @@
                 </div>
 
                 <div class="hidden md:flex items-center space-x-2">
-                    <button class="relative p-2 hover:bg-gray-100 rounded-lg">
+                    <button class="relative p-2 hover:bg-gray-100 rounded-lg" onclick="alert('Wishlist: Fitur akan segera hadir!');">
                         <i class="fas fa-heart text-xl"></i>
                         <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full" id="wishlistCount">0</span>
                     </button>
-                    <button class="relative p-2 hover:bg-gray-100 rounded-lg" id="cartBtn">
+                    <button class="relative p-2 hover:bg-gray-100 rounded-lg" id="cartBtn" onclick="alert('Keranjang: Fitur akan segera hadir!');">
                         <i class="fas fa-shopping-cart text-xl"></i>
                         <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full" id="cartCount">0</span>
                     </button>
-                    <button class="p-2 hover:bg-gray-100 rounded-lg">
+                    <button class="p-2 hover:bg-gray-100 rounded-lg" onclick="alert('Profil: Fitur login/register akan segera hadir!');">
                         <i class="fas fa-user text-xl"></i>
                     </button>
                 </div>
 
                 <div class="md:hidden">
-                    <button id="mobileMenuBtn" class="p-2 hover:bg-gray-100 rounded-lg">
+                    <button id="mobileMenuBtn" class="p-2 hover:bg-gray-100 rounded-lg" onclick="toggleMobileMenu();">
                         <i class="fas fa-bars text-xl"></i>
                     </button>
                 </div>
@@ -187,15 +86,15 @@
                     <input type="text" placeholder="Cari produk..." class="pl-12 pr-4 py-3 w-full rounded-full bg-gray-100">
                 </div>
                 <div class="flex flex-col space-y-2">
-                    <button class="flex items-center justify-start p-3 hover:bg-gray-100 rounded-lg">
+                    <button class="flex items-center justify-start p-3 hover:bg-gray-100 rounded-lg" onclick="alert('Wishlist: Fitur akan segera hadir!');">
                         <i class="fas fa-heart w-5 h-5 mr-3"></i> Wishlist
                         <span class="ml-auto bg-red-500 text-white text-xs px-2 py-1 rounded-full">0</span>
                     </button>
-                    <button class="flex items-center justify-start p-3 hover:bg-gray-100 rounded-lg">
+                    <button class="flex items-center justify-start p-3 hover:bg-gray-100 rounded-lg" onclick="alert('Keranjang: Fitur akan segera hadir!');">
                         <i class="fas fa-shopping-cart w-5 h-5 mr-3"></i> Keranjang
                         <span class="ml-auto bg-red-500 text-white text-xs px-2 py-1 rounded-full">0</span>
                     </button>
-                    <button class="flex items-center justify-start p-3 hover:bg-gray-100 rounded-lg">
+                    <button class="flex items-center justify-start p-3 hover:bg-gray-100 rounded-lg" onclick="alert('Profil: Fitur login/register akan segera hadir!');">
                         <i class="fas fa-user w-5 h-5 mr-3"></i> Akun
                     </button>
                 </div>
@@ -224,7 +123,7 @@
                     Marketplace terakurasi dengan jutaan produk berkualitas dari brand dan seller terbaik. Belanja online aman, mudah, dan penuh gaya.
                 </p>
                 <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-                    <button id="startShoppingBtn" onclick="scrollToProducts();" class="bg-white text-gray-900 hover:bg-gray-100 shadow-lg transform hover:scale-105 transition-transform px-8 py-3 rounded-lg font-semibold">
+                    <button id="startShoppingBtn" onclick="document.getElementById('productsSection').scrollIntoView({behavior: 'smooth'});" class="bg-white text-gray-900 hover:bg-gray-100 shadow-lg transform hover:scale-105 transition-transform px-8 py-3 rounded-lg font-semibold">
                         Mulai Belanja Sekarang <i class="fas fa-arrow-right ml-2"></i>
                     </button>
                     <button id="becomeSellerBtn" onclick="openSellerModal();" class="border-2 border-white text-white hover:bg-white hover:text-gray-900 shadow-lg transform hover:scale-105 transition-transform px-8 py-3 rounded-lg font-semibold">
@@ -1755,11 +1654,11 @@
                     <div class="bg-white p-3 rounded-lg shadow-sm">
                         <p class="text-sm text-gray-800">💬 Silakan pilih topik bantuan:</p>
                         <div class="mt-2 space-y-1">
-                            <button class="block w-full text-left text-sm text-blue-600 hover:text-blue-800 py-1">• Informasi Produk</button>
-                            <button class="block w-full text-left text-sm text-blue-600 hover:text-blue-800 py-1">• Status Pesanan</button>
-                            <button class="block w-full text-left text-sm text-blue-600 hover:text-blue-800 py-1">• Cara Pembayaran</button>
-                            <button class="block w-full text-left text-sm text-blue-600 hover:text-blue-800 py-1">• Menjadi Seller</button>
-                            <button class="block w-full text-left text-sm text-blue-600 hover:text-blue-800 py-1">• Keluhan & Saran</button>
+                            <button class="help-topic block w-full text-left text-sm text-blue-600 hover:text-blue-800 hover:bg-blue-50 py-2 px-2 rounded transition-colors">• Informasi Produk</button>
+                            <button class="help-topic block w-full text-left text-sm text-blue-600 hover:text-blue-800 hover:bg-blue-50 py-2 px-2 rounded transition-colors">• Status Pesanan</button>
+                            <button class="help-topic block w-full text-left text-sm text-blue-600 hover:text-blue-800 hover:bg-blue-50 py-2 px-2 rounded transition-colors">• Cara Pembayaran</button>
+                            <button class="help-topic block w-full text-left text-sm text-blue-600 hover:text-blue-800 hover:bg-blue-50 py-2 px-2 rounded transition-colors">• Menjadi Seller</button>
+                            <button class="help-topic block w-full text-left text-sm text-blue-600 hover:text-blue-800 hover:bg-blue-50 py-2 px-2 rounded transition-colors">• Keluhan & Saran</button>
                         </div>
                     </div>
                 </div>
@@ -1777,6 +1676,163 @@
     </div>
     
     <script>
+        // Mobile Menu Toggle Function
+        function toggleMobileMenu() {
+            var mobileMenu = document.getElementById('mobileMenu');
+            if (mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.remove('hidden');
+            } else {
+                mobileMenu.classList.add('hidden');
+            }
+        }
+        
+        // Simple Seller Modal  
+        function openSellerModal() {
+            var modalHtml = '<div id="sellerModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 20px;">';
+            modalHtml += '<div style="background: white; border-radius: 12px; padding: 24px; max-width: 400px; width: 100%;">';
+            modalHtml += '<div style="display: flex; justify-content: space-between; margin-bottom: 20px;">';
+            modalHtml += '<h2 style="font-size: 20px; font-weight: bold; margin: 0;">Daftar Sebagai Seller</h2>';
+            modalHtml += '<button onclick="closeSellerModal()" style="background: none; border: none; font-size: 24px; cursor: pointer;">&times;</button>';
+            modalHtml += '</div>';
+            modalHtml += '<div style="text-align: center; margin-bottom: 20px;">';
+            modalHtml += '<div style="width: 60px; height: 60px; background: #10B981; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">';
+            modalHtml += '<i class="fas fa-store" style="color: white; font-size: 20px;"></i>';
+            modalHtml += '</div>';
+            modalHtml += '<h3 style="font-size: 18px; margin: 0 0 8px;">Mulai Jualan di ZL Market Place</h3>';
+            modalHtml += '<p style="color: #666; font-size: 14px; margin: 0;">Bergabunglah dengan ribuan seller sukses!</p>';
+            modalHtml += '</div>';
+            modalHtml += '<form onsubmit="handleSellerForm(event)">';
+            modalHtml += '<div style="margin-bottom: 16px;">';
+            modalHtml += '<label style="display: block; margin-bottom: 4px;">Nama Toko</label>';
+            modalHtml += '<input type="text" name="storeName" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box;" placeholder="Contoh: Toko Elektronik Jaya">';
+            modalHtml += '</div>';
+            modalHtml += '<div style="margin-bottom: 16px;">';
+            modalHtml += '<label style="display: block; margin-bottom: 4px;">Kategori</label>';
+            modalHtml += '<select name="category" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box;">';
+            modalHtml += '<option value="">Pilih Kategori</option>';
+            modalHtml += '<option value="elektronik">Elektronik</option>';
+            modalHtml += '<option value="fashion">Fashion</option>';
+            modalHtml += '<option value="otomotif">Otomotif</option>';
+            modalHtml += '<option value="olahraga">Olahraga</option>';
+            modalHtml += '<option value="lainnya">Lainnya</option>';
+            modalHtml += '</select>';
+            modalHtml += '</div>';
+            modalHtml += '<div style="margin-bottom: 16px;">';
+            modalHtml += '<label style="display: block; margin-bottom: 4px;">WhatsApp</label>';
+            modalHtml += '<input type="tel" name="whatsapp" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box;" placeholder="08123456789">';
+            modalHtml += '</div>';
+            modalHtml += '<div style="margin-bottom: 20px; display: flex; align-items: center;">';
+            modalHtml += '<input type="checkbox" id="agree" required style="margin-right: 8px;">';
+            modalHtml += '<label for="agree" style="font-size: 14px;">Saya setuju dengan syarat dan ketentuan</label>';
+            modalHtml += '</div>';
+            modalHtml += '<button type="submit" style="width: 100%; padding: 12px; background: #10B981; color: white; border: none; border-radius: 6px; font-size: 16px; cursor: pointer;">Daftar Sekarang</button>';
+            modalHtml += '</form>';
+            modalHtml += '</div>';
+            modalHtml += '</div>';
+            
+            document.body.insertAdjacentHTML('beforeend', modalHtml);
+            
+            document.getElementById('sellerModal').addEventListener('click', function(e) {
+                if (e.target.id === 'sellerModal') closeSellerModal();
+            });
+        }
+        
+        function closeSellerModal() {
+            var modal = document.getElementById('sellerModal');
+            if (modal) modal.remove();
+        }
+        
+        function handleSellerForm(event) {
+            event.preventDefault();
+            var formData = new FormData(event.target);
+            var data = {
+                storeName: formData.get('storeName'),
+                category: formData.get('category'),
+                whatsapp: formData.get('whatsapp'),
+                date: new Date().toLocaleDateString()
+            };
+            
+            localStorage.setItem('sellerData', JSON.stringify(data));
+            closeSellerModal();
+            
+            var toast = document.createElement('div');
+            toast.style.cssText = 'position: fixed; top: 20px; right: 20px; background: #10B981; color: white; padding: 12px 20px; border-radius: 8px; z-index: 10000;';
+            toast.textContent = 'Pendaftaran seller berhasil!';
+            document.body.appendChild(toast);
+            
+            setTimeout(function() {
+                toast.remove();
+            }, 3000);
+        }
+        
+        // WhatsApp Widget Functions
+        function initWhatsappWidget() {
+            var whatsappBtn = document.getElementById('whatsappBtn');
+            var whatsappChat = document.getElementById('whatsappChat');
+            var closeBtn = document.getElementById('closeWhatsappChat');
+            
+            // Toggle chat window
+            whatsappBtn.addEventListener('click', function() {
+                if (whatsappChat.classList.contains('hidden')) {
+                    whatsappChat.classList.remove('hidden');
+                    // Show notification that chat is opening
+                    showWhatsappNotification();
+                } else {
+                    whatsappChat.classList.add('hidden');
+                }
+            });
+            
+            // Close chat window
+            closeBtn.addEventListener('click', function() {
+                whatsappChat.classList.add('hidden');
+            });
+            
+            // Add click handlers for help topics
+            var helpTopics = whatsappChat.querySelectorAll('.help-topic');
+            helpTopics.forEach(function(topic, index) {
+                topic.addEventListener('click', function() {
+                    var messages = [
+                        'Halo! Saya butuh informasi tentang produk di website.',
+                        'Hi! Saya ingin tahu status pesanan saya.',
+                        'Halo! Bagaimana cara pembayaran yang tersedia?',
+                        'Hi! Saya tertarik untuk menjadi seller di marketplace ini.',
+                        'Halo! Saya ada keluhan dan saran untuk website ini.'
+                    ];
+                    
+                    var phoneNumber = '+447424425023';
+                    var message = encodeURIComponent(messages[index]);
+                    var whatsappUrl = 'https://wa.me/' + phoneNumber + '?text=' + message;
+                    
+                    window.open(whatsappUrl, '_blank');
+                    whatsappChat.classList.add('hidden');
+                });
+            });
+        }
+        
+        function showWhatsappNotification() {
+            var notification = document.createElement('div');
+            notification.style.cssText = 'position: fixed; top: 20px; right: 20px; background: #25D366; color: white; padding: 12px 20px; border-radius: 8px; z-index: 10001; box-shadow: 0 4px 12px rgba(0,0,0,0.2);';
+            notification.innerHTML = '<i class="fab fa-whatsapp"></i> Customer Service siap membantu Anda!';
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(function() {
+                notification.remove();
+            }, 3000);
+        }
+        
+        // Initialize WhatsApp widget when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initWhatsappWidget();
+        });
+        
+        // If DOMContentLoaded already fired, initialize immediately
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initWhatsappWidget);
+        } else {
+            initWhatsappWidget();
+        }
+        
         // WhatsApp Widget functionality
         document.addEventListener('DOMContentLoaded', function() {
             const whatsappBtn = document.getElementById('whatsappBtn');

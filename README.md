@@ -1,11 +1,22 @@
-# 🛒 ZL Market Place  
+<p align="center">
+  <h1>🛒 ZL Market Place</h1>
+</p>
 
-[![GitHub license](https://img.shields.io/github/license/kongali1720/zl-marketplace?style=for-the-badge)](./LICENSE)
-![GitHub stars](https://img.shields.io/github/stars/kongali1720/zl-marketplace?style=for-the-badge&color=yellow)
-![GitHub forks](https://img.shields.io/github/forks/kongali1720/zl-marketplace?style=for-the-badge&color=orange)
-![GitHub issues](https://img.shields.io/github/issues/kongali1720/zl-marketplace?style=for-the-badge&color=red)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/kongali1720/zl-marketplace?style=for-the-badge&color=blue)
+<p align="center">
+  <a href="https://kongali1720.github.io/ZL-Marketplace/">
+    <img src="https://img.shields.io/badge/ZL-MarketPlace-Visit-blue?style=for-the-badge" alt="ZL Market Place">
+  </a>
+</p>
 
+<p align="center">
+  <a href="./LICENSE">
+    <img src="https://img.shields.io/github/license/kongali1720/zl-marketplace?style=for-the-badge" alt="GitHub license">
+  </a>
+  <img src="https://img.shields.io/github/stars/kongali1720/zl-marketplace?style=for-the-badge&color=yellow" alt="GitHub stars">
+  <img src="https://img.shields.io/github/forks/kongali1720/zl-marketplace?style=for-the-badge&color=orange" alt="GitHub forks">
+  <img src="https://img.shields.io/github/issues/kongali1720/zl-marketplace?style=for-the-badge&color=red" alt="GitHub issues">
+  <img src="https://img.shields.io/github/issues-pr/kongali1720/zl-marketplace?style=for-the-badge&color=blue" alt="GitHub pull requests">
+</p>
 ---
 
 <p align="center">

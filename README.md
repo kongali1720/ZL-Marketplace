@@ -1,14 +1,11 @@
-<p align="center">
+<div align="center">
   <h1>🛒 ZL Market Place</h1>
-</p>
 
 <p align="center">
-  <a href="https://kongali1720.github.io/ZL-Marketplace/">
-    <img src="https://img.shields.io/badge/ZL-MarketPlace-Visit-blue?style=for-the-badge" alt="ZL Market Place">
-  </a>
+  <a href="https://kongali1720.github.io/ZL-Marketplace/">Kunjungi ZL Market Place</a>
 </p>
 
-<p align="center">
+
   <a href="./LICENSE">
     <img src="https://img.shields.io/github/license/kongali1720/zl-marketplace?style=for-the-badge" alt="GitHub license">
   </a>
@@ -16,7 +13,8 @@
   <img src="https://img.shields.io/github/forks/kongali1720/zl-marketplace?style=for-the-badge&color=orange" alt="GitHub forks">
   <img src="https://img.shields.io/github/issues/kongali1720/zl-marketplace?style=for-the-badge&color=red" alt="GitHub issues">
   <img src="https://img.shields.io/github/issues-pr/kongali1720/zl-marketplace?style=for-the-badge&color=blue" alt="GitHub pull requests">
-</p>
+</div>
+
 
 ---
 
